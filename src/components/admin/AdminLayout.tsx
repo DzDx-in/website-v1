@@ -27,7 +27,7 @@ const AdminLayout = ({ children, title, currentPath }: AdminLayoutProps) => {
     }
   }, [router]);
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     localStorage.removeItem('adminToken');
     router.push('/admin');
   };

@@ -27,6 +27,12 @@ const Footer = () => {
           >
             Privacy Policy
           </Link>
+          <Link 
+            href="/jobs" 
+            className="text-white/80 hover:text-dzdx-blue hover:underline transition-colors duration-300"
+          >
+            Career
+          </Link>
         </div>
       </div>
     </footer>

@@ -30,21 +30,28 @@ const writeJobsData = (data: Job[]): void => {
   }
 };
 
+// Helper function to extract job ID from the request URL
+const getIdFromRequest = (request: NextRequest): string | null => {
+  const url = new URL(request.url);
+  const segments = url.pathname.split('/');
+  return segments[segments.length - 1] || null;
+};
+
 // GET handler - Get a specific job
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+    
     const jobs = getJobsData();
-    const job = jobs.find(job => job.id === params.id);
+    const job = jobs.find(job => job.id === id);
     
     if (!job) {
       return NextResponse.json({ error: 'Job not found' }, { status: 404 });
     }
     
     // For public requests, only return active jobs
-    const url = new URL(req.url);
+    const url = new URL(request.url);
     const isAdminRequest = url.searchParams.get('admin') === 'true';
     
     if (!isAdminRequest && !job.isActive) {
@@ -59,20 +66,20 @@ export async function GET(
 }
 
 // PUT handler - Update a job (admin only)
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest) {
   try {
     // Check authentication
-    const authResult = await isAuthenticated(req);
+    const authResult = await isAuthenticated(request);
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
-    const jobData = await req.json();
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+    
+    const jobData = await request.json();
     const jobs = getJobsData();
-    const jobIndex = jobs.findIndex(job => job.id === params.id);
+    const jobIndex = jobs.findIndex(job => job.id === id);
     
     if (jobIndex === -1) {
       return NextResponse.json({ error: 'Job not found' }, { status: 404 });
@@ -82,7 +89,7 @@ export async function PUT(
     const updatedJob: Job = {
       ...jobs[jobIndex],
       ...jobData,
-      id: params.id, // Ensure ID doesn't change
+      id, // Ensure ID doesn't change
       postedDate: jobs[jobIndex].postedDate, // Preserve original posted date
     };
     
@@ -97,19 +104,19 @@ export async function PUT(
 }
 
 // DELETE handler - Delete a job (admin only)
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest) {
   try {
     // Check authentication
-    const authResult = await isAuthenticated(req);
+    const authResult = await isAuthenticated(request);
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+    
     const jobs = getJobsData();
-    const jobIndex = jobs.findIndex(job => job.id === params.id);
+    const jobIndex = jobs.findIndex(job => job.id === id);
     
     if (jobIndex === -1) {
       return NextResponse.json({ error: 'Job not found' }, { status: 404 });

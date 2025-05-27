@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import EarthBackground from '@/components/EarthBackground';
 
 export default function AdminLoginPage() {
@@ -130,12 +131,12 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="mt-8 text-center">
-            <a
+            <Link
               href="/"
               className="text-dzdx-blue hover:text-dzdx-light-blue transition-colors"
             >
               Return to Website
-            </a>
+            </Link>
           </div>
         </div>
       </main>

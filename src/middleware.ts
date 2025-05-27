@@ -1,13 +1,22 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+// import type { NextRequest } from 'next/server';
 
-// This middleware runs for all routes
-export function middleware(request: NextRequest) {
-  // Just passing through - we're using this to ensure environment variables are loaded
+// This function can be marked `async` if using `await` inside
+export default function middleware(): NextResponse {
+  // We're not using the request parameter
   return NextResponse.next();
 }
 
-// Configure the matcher to run for all API routes
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/api/:path*',
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
 };

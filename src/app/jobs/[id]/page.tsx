@@ -6,93 +6,6 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import EarthBackground from '@/components/EarthBackground';
 
-// This data will be replaced with API call later
-const INITIAL_JOBS = [
-  {
-    id: "software-engineer-1",
-    title: "Senior Software Engineer",
-    department: "Engineering",
-    location: "Hyderabad, India",
-    type: "Full-time",
-    experience: "3-5 years",
-    salary: "₹20-30 LPA",
-    postedDate: "2025-05-10T00:00:00Z",
-    description: "We're looking for an experienced Software Engineer to join our team to help build and scale our next-generation products. As a Senior Software Engineer at DZDX Solutions, you will work with a talented team of engineers to design and implement cutting-edge solutions. You'll collaborate closely with product managers, designers, and other stakeholders to deliver high-quality, scalable software that meets our customers' needs.",
-    responsibilities: [
-      "Design and implement scalable software solutions",
-      "Lead technical projects from conception to deployment",
-      "Collaborate with cross-functional teams to define and implement new features",
-      "Write clean, maintainable, and well-tested code",
-      "Mentor junior engineers and provide technical guidance",
-      "Participate in code reviews and contribute to engineering best practices",
-      "Troubleshoot and resolve complex technical issues",
-      "Stay up-to-date with emerging trends and technologies"
-    ],
-    requirements: [
-      "Bachelor's degree in Computer Science or related field",
-      "3+ years of experience with modern JavaScript frameworks",
-      "Proficiency in React, Next.js, and TypeScript",
-      "Experience with RESTful APIs and GraphQL",
-      "Strong understanding of software design patterns and principles",
-      "Excellent problem-solving and communication skills",
-      "Experience with cloud platforms (AWS, Azure, or GCP)",
-      "Knowledge of CI/CD practices and tools"
-    ],
-    benefits: [
-      "Competitive salary and equity",
-      "Health insurance",
-      "Flexible work arrangements",
-      "Professional development budget",
-      "Modern equipment and tools",
-      "Collaborative and innovative work environment",
-      "Regular team events and activities"
-    ],
-    applicationDeadline: "2025-06-30T00:00:00Z"
-  },
-  {
-    id: "data-scientist-1",
-    title: "Data Scientist",
-    department: "AI & Analytics",
-    location: "Kanpur, India",
-    type: "Full-time",
-    experience: "2-4 years",
-    salary: "₹18-25 LPA",
-    postedDate: "2025-05-15T00:00:00Z",
-    description: "Join our data science team to build intelligent data-driven solutions that power our products and services. As a Data Scientist at DZDX Solutions, you will work on challenging problems and apply your expertise in machine learning and statistical analysis to extract valuable insights from complex datasets. You'll collaborate with engineers and product managers to translate these insights into features that enhance our products.",
-    responsibilities: [
-      "Develop machine learning models to solve complex business problems",
-      "Extract insights from large datasets",
-      "Collaborate with engineering teams to implement ML solutions",
-      "Build and maintain data pipelines",
-      "Design experiments and A/B tests",
-      "Create visualizations to communicate findings to stakeholders",
-      "Stay current with the latest research and techniques in machine learning",
-      "Participate in code reviews and knowledge sharing sessions"
-    ],
-    requirements: [
-      "Master's degree in Computer Science, Statistics or related field",
-      "Experience with Python, TensorFlow, and PyTorch",
-      "Strong background in statistical analysis and data visualization",
-      "Proficiency in SQL and experience with big data technologies",
-      "Excellent problem-solving and critical thinking skills",
-      "Experience with feature engineering and model evaluation",
-      "Knowledge of software engineering best practices",
-      "Good communication and collaboration skills"
-    ],
-    benefits: [
-      "Competitive salary",
-      "Health insurance",
-      "Learning budget",
-      "Flexible work hours",
-      "Remote work options",
-      "Regular team outings",
-      "Casual work environment"
-    ],
-    applicationDeadline: "2025-06-15T00:00:00Z"
-  },
-  // Additional jobs would be here in the actual implementation
-];
-
 // TypeScript types
 type Job = {
   id: string;
@@ -466,7 +379,7 @@ export default function JobDetailPage() {
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">Application Submitted!</h3>
                     <p className="text-white/80 mb-6">
-                      Thank you for your interest in joining DZDX Solutions. We'll review your application and get back to you soon.
+                      Thank you for your interest in joining DZDX Solutions. We&apos;ll review your application and get back to you soon.
                     </p>
                     <button
                       onClick={() => setSubmitSuccess(false)}
@@ -585,7 +498,7 @@ export default function JobDetailPage() {
                           onChange={handleInputChange}
                           rows={4}
                           className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-dzdx-blue resize-none"
-                          placeholder="Share why you're a good fit for this position"
+                          placeholder="Share why you&apos;re a good fit for this position"
                         ></textarea>
                         {formErrors.coverLetter && (
                           <p className="mt-1 text-sm text-red-400">{formErrors.coverLetter}</p>
@@ -623,7 +536,7 @@ export default function JobDetailPage() {
               About DZDX Solutions
             </h2>
             <p className="text-white/90 mb-4">
-              DZDX Solutions is a dynamic technology company focused on delivering innovative software solutions. We're a team of passionate engineers, designers, and problem solvers committed to building products that make a difference.
+              DZDX Solutions is a dynamic technology company focused on delivering innovative software solutions. We&apos;re a team of passionate engineers, designers, and problem solvers committed to building products that make a difference.
             </p>
             <p className="text-white/90">
               Join us and be part of our mission to compile innovation and deliver exceptional solutions.

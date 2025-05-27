@@ -1,16 +1,17 @@
 import { NextRequest } from 'next/server';
 import { compare } from 'bcrypt';
 import { verify } from 'jsonwebtoken';
-import getConfig from 'next/config';
-
-// Get serverRuntimeConfig
-const { serverRuntimeConfig } = getConfig() || { serverRuntimeConfig: {} };
 
 interface AuthResult {
   authenticated: boolean;
   userId?: string;
   message?: string;
 }
+
+// Environment variables should be set in .env.local
+// ADMIN_USERNAME=admin@dzdx.com
+// ADMIN_PASSWORD_HASH=<bcrypt hash of your password>
+// JWT_SECRET=<your-secret-key>
 
 export async function isAuthenticated(req: NextRequest): Promise<AuthResult> {
   // Check for auth header
@@ -27,8 +28,7 @@ export async function isAuthenticated(req: NextRequest): Promise<AuthResult> {
 
   try {
     // Verify JWT token
-    const jwtSecret = serverRuntimeConfig.JWT_SECRET || process.env.JWT_SECRET || 'default-secret-change-this';
-    const decoded = verify(token, jwtSecret) as { userId: string };
+    const decoded = verify(token, process.env.JWT_SECRET || 'default-secret-change-this') as { userId: string };
     
     return { 
       authenticated: true,
@@ -42,35 +42,25 @@ export async function isAuthenticated(req: NextRequest): Promise<AuthResult> {
 
 export async function authenticateUser(email: string, password: string): Promise<{ token?: string; success: boolean; message: string }> {
   // Check if credentials match admin credentials
-  const adminEmail = serverRuntimeConfig.ADMIN_USERNAME || process.env.ADMIN_USERNAME;
-  const adminPasswordHash = serverRuntimeConfig.ADMIN_PASSWORD_HASH || process.env.ADMIN_PASSWORD_HASH;
-  
-  // Debug log to see if env variables are being accessed
-  console.log('Environment variables check:');
-  console.log('ADMIN_USERNAME available:', !!adminEmail);
-  console.log('ADMIN_USERNAME available:', adminEmail);
-  console.log('ADMIN_PASSWORD_HASH available:', !!adminPasswordHash);
-  console.log('ADMIN_PASSWORD_HASH available:', adminPasswordHash);
+  const adminEmail = process.env.ADMIN_USERNAME;
+  const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
   
   if (!adminEmail || !adminPasswordHash) {
-    console.error('Admin credentials not configured', { 
-      adminEmailExists: !!adminEmail,
-      adminPasswordHashExists: !!adminPasswordHash 
-    });
+    console.error('Admin credentials not configured');
     return { 
       success: false, 
       message: 'Authentication failed: System not properly configured'
     };
   }
 
+  if (email !== adminEmail) {
+    return { 
+      success: false, 
+      message: 'Invalid credentials'
+    };
+  }
+
   try {
-    if (email !== adminEmail) {
-      return { 
-        success: false, 
-        message: 'Invalid credentials'
-      };
-    }
-    
     // Compare password with stored hash
     const passwordMatch = await compare(password, adminPasswordHash);
     
@@ -99,13 +89,17 @@ export async function authenticateUser(email: string, password: string): Promise
 }
 
 function generateToken(userId: string): string {
+  // Using ES6 import style is not possible in this context because of
+  // the dynamic nature of the import in a function. For middleware and
+  // API routes, we need to use a conditional import or import at the top level.
+  // This is a known limitation with Next.js and ESM modules.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const jwt = require('jsonwebtoken');
-  const jwtSecret = serverRuntimeConfig.JWT_SECRET || process.env.JWT_SECRET || 'default-secret-change-this';
   
   // Create token with 24 hour expiration
   return jwt.sign(
     { userId },
-    jwtSecret,
+    process.env.JWT_SECRET || 'default-secret-change-this',
     { expiresIn: '24h' }
   );
 }

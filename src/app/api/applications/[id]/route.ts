@@ -5,10 +5,8 @@ import { JobApplication } from '../route';
 import { isAuthenticated } from '@/lib/auth';
 import { sendStatusUpdateEmail } from '@/lib/email';
 
-// Define the application data file path
 const dataFilePath = path.join(process.cwd(), 'data', 'applications.json');
 
-// Helper function to read applications data
 const getApplicationsData = (): JobApplication[] => {
   try {
     if (!fs.existsSync(dataFilePath)) {
@@ -22,7 +20,6 @@ const getApplicationsData = (): JobApplication[] => {
   }
 };
 
-// Helper function to write applications data
 const writeApplicationsData = (data: JobApplication[]): void => {
   try {
     fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
@@ -31,25 +28,29 @@ const writeApplicationsData = (data: JobApplication[]): void => {
   }
 };
 
-// GET handler - Get a specific application (admin only)
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+const getIdFromRequest = (request: NextRequest): string | null => {
+  const url = new URL(request.url);
+  const segments = url.pathname.split('/');
+  return segments[segments.length - 1] || null;
+};
+
+export async function GET(request: NextRequest) {
   try {
-    // Check authentication
-    const authResult = await isAuthenticated(req);
+    const authResult = await isAuthenticated(request);
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
+
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+
     const applications = getApplicationsData();
-    const application = applications.find(app => app.id === params.id);
-    
+    const application = applications.find(app => app.id === id);
+
     if (!application) {
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
     }
-    
+
     return NextResponse.json(application);
   } catch (error) {
     console.error('Error fetching application:', error);
@@ -57,49 +58,44 @@ export async function GET(
   }
 }
 
-// PUT handler - Update application status (admin only)
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest) {
   try {
-    // Check authentication
-    const authResult = await isAuthenticated(req);
+    const authResult = await isAuthenticated(request);
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
-    const updateData = await req.json();
+
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+
+    const updateData = await request.json();
     const applications = getApplicationsData();
-    const applicationIndex = applications.findIndex(app => app.id === params.id);
-    
+    const applicationIndex = applications.findIndex(app => app.id === id);
+
     if (applicationIndex === -1) {
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
     }
-    
+
     const previousStatus = applications[applicationIndex].status;
-    
-    // Update the application
+
     const updatedApplication: JobApplication = {
       ...applications[applicationIndex],
       ...updateData,
-      id: params.id, // Ensure ID doesn't change
-      submittedAt: applications[applicationIndex].submittedAt, // Preserve original submission date
+      id,
+      submittedAt: applications[applicationIndex].submittedAt,
     };
-    
+
     applications[applicationIndex] = updatedApplication;
     writeApplicationsData(applications);
-    
-    // Send email notification if status has changed
+
     if (previousStatus !== updatedApplication.status) {
       try {
         await sendStatusUpdateEmail(updatedApplication);
       } catch (emailError) {
         console.error('Error sending status update email:', emailError);
-        // Continue with the process even if email fails
       }
     }
-    
+
     return NextResponse.json(updatedApplication);
   } catch (error) {
     console.error('Error updating application:', error);
@@ -107,28 +103,26 @@ export async function PUT(
   }
 }
 
-// DELETE handler - Delete an application (admin only)
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest) {
   try {
-    // Check authentication
-    const authResult = await isAuthenticated(req);
+    const authResult = await isAuthenticated(request);
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
+
+    const id = getIdFromRequest(request);
+    if (!id) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+
     const applications = getApplicationsData();
-    const applicationIndex = applications.findIndex(app => app.id === params.id);
-    
+    const applicationIndex = applications.findIndex(app => app.id === id);
+
     if (applicationIndex === -1) {
       return NextResponse.json({ error: 'Application not found' }, { status: 404 });
     }
-    
+
     applications.splice(applicationIndex, 1);
     writeApplicationsData(applications);
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting application:', error);

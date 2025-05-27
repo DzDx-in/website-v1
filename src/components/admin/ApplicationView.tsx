@@ -9,7 +9,7 @@ interface ApplicationViewProps {
 }
 
 const ApplicationView = ({ application }: ApplicationViewProps) => {
-  const [status, setStatus] = useState(application.status);
+  const [status, setStatus] = useState<JobApplication['status']>(application.status);
   const [notes, setNotes] = useState(application.notes || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -60,7 +60,7 @@ const ApplicationView = ({ application }: ApplicationViewProps) => {
       setTimeout(() => {
         router.refresh();
       }, 1000);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Error updating application:', err);
       setError(err instanceof Error ? err.message : 'An error occurred. Please try again.');
     } finally {
@@ -183,7 +183,7 @@ const ApplicationView = ({ application }: ApplicationViewProps) => {
           <select
             id="status"
             value={status}
-            onChange={(e) => setStatus(e.target.value as any)}
+            onChange={(e) => setStatus(e.target.value as JobApplication['status'])}
             className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-dzdx-blue"
           >
             <option value="new">New</option>

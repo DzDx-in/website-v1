@@ -35,7 +35,7 @@ const JobForm = ({ job = {}, isEdit = false }: JobFormProps) => {
   useEffect(() => {
     if (isEdit && job) {
       // Format date for date input (YYYY-MM-DD)
-      let formattedJob = { ...job };
+      const formattedJob = { ...job };
       if (job.applicationDeadline) {
         const deadline = new Date(job.applicationDeadline);
         formattedJob.applicationDeadline = deadline.toISOString().split('T')[0];
@@ -95,7 +95,7 @@ const JobForm = ({ job = {}, isEdit = false }: JobFormProps) => {
       }
 
       // Prepare data
-      let jobData = { ...formData };
+      const jobData = { ...formData };
       
       // Format deadline as ISO string if present
       if (jobData.applicationDeadline) {
@@ -126,7 +126,7 @@ const JobForm = ({ job = {}, isEdit = false }: JobFormProps) => {
         throw new Error(data.error || 'Failed to save job');
       }
 
-      const savedJob = await response.json();
+      await response.json();
 
       if (isEdit) {
         setSuccess('Job updated successfully!');

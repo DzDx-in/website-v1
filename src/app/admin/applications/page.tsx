@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react';
+import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { JobApplication } from '@/app/api/applications/route';
 import { Job } from '@/app/api/jobs/route';
 
-export default function AdminApplicationsPage() {
+// Create a client component that uses useSearchParams
+function ApplicationsContent() {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,15 +17,17 @@ export default function AdminApplicationsPage() {
     status: ''
   });
   const router = useRouter();
-  const searchParams = useSearchParams();
   
   useEffect(() => {
-    // Set initial filter from URL if present
-    const jobIdParam = searchParams.get('jobId');
-    if (jobIdParam) {
-      setFilters(prev => ({ ...prev, jobId: jobIdParam }));
+    // Check for URL params manually instead of using useSearchParams
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const jobIdParam = urlParams.get('jobId');
+      if (jobIdParam) {
+        setFilters(prev => ({ ...prev, jobId: jobIdParam }));
+      }
     }
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     // Check if admin is authenticated
@@ -102,7 +105,7 @@ export default function AdminApplicationsPage() {
   };
 
   return (
-    <AdminLayout title="Applications" currentPath="/admin/applications">
+    <>
       {loading ? (
         <div className="flex justify-center py-12">
           <div className="spinner"></div>
@@ -247,6 +250,21 @@ export default function AdminApplicationsPage() {
           </div>
         </>
       )}
+    </>
+  );
+}
+
+// The main page component that uses Suspense
+export default function AdminApplicationsPage() {
+  return (
+    <AdminLayout title="Applications" currentPath="/admin/applications">
+      <Suspense fallback={
+        <div className="flex justify-center py-12">
+          <div className="spinner"></div>
+        </div>
+      }>
+        <ApplicationsContent />
+      </Suspense>
     </AdminLayout>
   );
 }
