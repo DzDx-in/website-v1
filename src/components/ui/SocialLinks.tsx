@@ -3,7 +3,7 @@
 const socialLinks = [
   {
     icon: 'fab fa-linkedin',
-    href: 'https://linkedin.com/company/dzdx-solutions',
+    href: 'https://www.linkedin.com/company/dzdx-in',
     label: 'LinkedIn',
   },
   {
@@ -13,12 +13,12 @@ const socialLinks = [
   },
   {
     icon: 'fab fa-github',
-    href: 'https://github.com/dzdx-solutions',
+    href: 'https://github.com/dzdx-in',
     label: 'GitHub',
   },
   {
     icon: 'fab fa-instagram',
-    href: 'https://instagram.com/dzdx.solutions',
+    href: 'https://www.instagram.com/dzdx.in/',
     label: 'Instagram',
   },
 ];

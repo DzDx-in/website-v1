@@ -1,0 +1,16 @@
+
+{
+  "email": {
+    "notificationEmail": "adm.dzdx@gmail.com",
+    "ccEmail": "",
+    "enableAutoResponder": true
+  },
+  "careerPage": {
+    "title": "Join Our Team",
+    "description": "Explore opportunities to be part of something extraordinary at DZDX Solutions"
+  },
+  "system": {
+    "version": "1.0.0",
+    "environment": "development"
+  }
+}
