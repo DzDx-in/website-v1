@@ -54,10 +54,10 @@ interface AnalysisSectionProps {
   isActive?: boolean;
 }
 
-type WalkthroughItem = 
-  | (MetricConfig & { type: 'metric' })
-  | (ProgressConfig & { type: 'progress' })
-  | (SourceConfig & { type: 'source' });
+// type WalkthroughItem = 
+//   | (MetricConfig & { type: 'metric' })
+//   | (ProgressConfig & { type: 'progress' })
+//   | (SourceConfig & { type: 'source' });
 
 const AnalysisSection = forwardRef<HTMLDivElement, AnalysisSectionProps>(
   ({
