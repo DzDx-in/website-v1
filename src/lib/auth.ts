@@ -62,6 +62,7 @@ export async function authenticateUser(email: string, password: string): Promise
 
   try {
     // Compare password with stored hash
+    console.log('Comparing password:', password, 'with hash:', adminPasswordHash);
     const passwordMatch = await compare(password, adminPasswordHash);
     
     if (!passwordMatch) {
