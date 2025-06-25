@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Font Awesome */}
         <link 
           rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -49,6 +50,24 @@ export default function RootLayout({
         <meta name="theme-color" content="#0a0a0f" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function loadScript(a){
+                var b=document.getElementsByTagName("head")[0],
+                    c=document.createElement("script");
+                c.type="text/javascript";
+                c.src="https://tracker.metricool.com/resources/be.js";
+                c.onreadystatechange=a;
+                c.onload=a;
+                b.appendChild(c);
+              }
+              loadScript(function(){
+                beTracker.t({hash:"34148d143b013aecb31d0e7c9e4bb271"});
+              });
+            `,
+          }}
+        />
       </head>
       <body>
         <div className="min-h-screen bg-dzdx-dark">
