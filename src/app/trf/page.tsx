@@ -18,15 +18,14 @@ export default function FluidLandingPage() {
       const heroTitle = document.getElementById('heroTitle') as HTMLElement;
       const heroSubtitle = document.getElementById('heroSubtitle') as HTMLElement;
       const backgroundOverlay = document.getElementById('backgroundOverlay') as HTMLElement;
-      const heroContent = document.getElementById('heroContent') as HTMLElement;
+      // const heroContent = document.getElementById('heroContent') as HTMLElement;
       const scrollIndicator = document.getElementById('scrollIndicator') as HTMLElement;
       const featuresContainer = document.getElementById('featuresContainer') as HTMLElement;
 
       let ticking = false;
       let hasAutoScrolled = false;
       let touchStartY = 0;
-      let lastScrollTime = 0;
-      let scrollVelocity = 0;
+      // let lastScrollTime = 0;
       let isInHeroSection = true;
 
       function autoScrollToFeatures() {
@@ -151,12 +150,12 @@ export default function FluidLandingPage() {
 
       // Wheel event for desktop - ultra sensitive
       function handleWheel(e: WheelEvent) {
-        const currentTime = Date.now();
-        const deltaTime = currentTime - lastScrollTime;
-        lastScrollTime = currentTime;
+        // const currentTime = Date.now();
+        // const deltaTime = currentTime - lastScrollTime;
+        // lastScrollTime = currentTime;
         
         // Calculate scroll velocity
-        scrollVelocity = Math.abs(e.deltaY) / deltaTime;
+        // let scrollVelocity = Math.abs(e.deltaY) / deltaTime;
         
         // Ultra sensitive - any downward scroll triggers auto-scroll, but only in hero section
         if (e.deltaY > 0 && !hasAutoScrolled && isInHeroSection) {
@@ -910,7 +909,7 @@ export default function FluidLandingPage() {
                 Most readers consume news without understanding the hidden emotional manipulation and bias built into headlines and articles.
               </p>
               <ul className="problem-examples">
-                <li>"BREAKING: Economy CRASHES as Politicians FAIL" - Fear-driven, biased language</li>
+                <li>&quot;BREAKING: Economy CRASHES as Politicians FAIL&quot; - Fear-driven, biased language</li>
                 <li>Articles designed to provoke anger rather than inform</li>
                 <li>Hidden partisan slants that go unnoticed</li>
               </ul>
@@ -1057,7 +1056,7 @@ export default function FluidLandingPage() {
             <div className="problem-side">
               <h3 className="problem-title">Context Confusion</h3>
               <p className="problem-description">
-                Articles often mention entities without proper context, leaving readers confused about who's who and what's what.
+                Articles often mention entities without proper context, leaving readers confused about who&apos;s who and what&apos;s what.
               </p>
               <ul className="problem-examples">
                 <li>Names mentioned without introduction</li>
@@ -1107,7 +1106,7 @@ export default function FluidLandingPage() {
                 <div className="timeline-card">
                   <div className="timeline-year">2016</div>
                   <h3>Fake News Crisis</h3>
-                  <p>Election misinformation peak. "Fake news" entered mainstream vocabulary. Manual fact-checking couldn't keep up with viral false content.</p>
+                  <p>Election misinformation peak. &quot;Fake news&quot; entered mainstream vocabulary. Manual fact-checking couldn&apos;t keep up with viral false content.</p>
                 </div>
               </div>
 
@@ -1116,7 +1115,7 @@ export default function FluidLandingPage() {
                 <div className="timeline-card">
                   <div className="timeline-year">2020</div>
                   <h3>AI Detection Begins</h3>
-                  <p>First AI tools for detecting bias and misinformation. COVID-19 "infodemic" showed need for real-time analysis. Basic sentiment analysis tools emerged.</p>
+                  <p>First AI tools for detecting bias and misinformation. COVID-19 &quot;infodemic&quot; showed need for real-time analysis. Basic sentiment analysis tools emerged.</p>
                 </div>
               </div>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import '../styles/globals.css';
-import Footer from '@/components/Layout/Footer';
 
 export const metadata: Metadata = {
   title: 'DZDX Solutions Pvt Ltd - Compiling Innovation. Delivering Solutions.',
