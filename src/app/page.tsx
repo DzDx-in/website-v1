@@ -5,6 +5,7 @@ import Image from 'next/image';
 import EarthBackground from '@/components/EarthBackground';
 import EmailForm from '@/components/ui/EmailForm';
 import SocialLinks from '@/components/ui/SocialLinks';
+import Footer from '@/components/Layout/Footer';
 
 export default function HomePage() {
   return (
@@ -46,6 +47,9 @@ export default function HomePage() {
           </div>
         </div>
       </main>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

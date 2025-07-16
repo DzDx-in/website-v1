@@ -70,9 +70,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="min-h-screen bg-dzdx-dark">
+        <div>
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </body>
     </html>
