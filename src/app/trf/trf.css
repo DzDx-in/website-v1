@@ -76,6 +76,23 @@ font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
   pointer-events: none;
 }
 
+.landing-motto {
+  margin-top: 0.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.75rem); 
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.dot {
+  font-size: 1.2em;
+  margin: 0 0.4rem;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 
 
 /* Cards Container */
@@ -858,4 +875,5 @@ font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
     gap: 2rem;
     text-align: center;
   }
+
 }

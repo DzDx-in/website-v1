@@ -13,14 +13,14 @@ export default function TRFPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
 
-  
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
-  
+
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -121,8 +121,12 @@ export default function TRFPage() {
         <div className="landing-text-wrapper">
           <div className="landing-intro">Introducing</div>
           <h1 className="landing-title">The Real Feed</h1>
+          <div className="landing-motto">
+            Facts <span className="dot">•</span> Perspective <span className="dot">•</span> Power
+          </div>
         </div>
       </div>
+
 
       {isSticky && (
         <div className="sticky-title">The Real Feed</div>
@@ -134,7 +138,7 @@ export default function TRFPage() {
           <div
             key={card.id}
             className={`card card-${card.id}`}
-            style={{ zIndex: index + 2 }} 
+            style={{ zIndex: index + 2 }}
           >
             {/* Vertical labels outside the card */}
             <div className="vertical-label left-label">Our Solution</div>
@@ -303,7 +307,13 @@ export default function TRFPage() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
-            <Image src="/dzdx_nobg.png" alt="DZDX logo" className="footer-logo" />
+            <Image
+              src="/dzdx_nobg.png"
+              alt="DZDX Logo"
+              width={150}
+              height={40}
+              className="h-auto"
+            />
             <br />
             <p>
               Revolutionizing news consumption through AI-powered analysis.
