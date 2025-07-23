@@ -6,7 +6,7 @@ import EarthBackground from '@/components/EarthBackground';
 import EmailForm from '@/components/ui/EmailForm';
 import SocialLinks from '@/components/ui/SocialLinks';
 import Footer from '@/components/Layout/Footer';
-
+import '@/styles/style.css';
 export default function HomePage() {
   return (
     <div className="relative min-h-screen">
