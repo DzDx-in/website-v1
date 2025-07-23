@@ -2,38 +2,40 @@ import type { Metadata } from 'next';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'DZDX Solutions Pvt Ltd – Creators of The Real Feed',
+  title: 'The Real Feed – India’s Smartest AI-Powered News App | DZDX Solutions',
   description:
-    'DZDX Solutions is an Indian tech company building cutting-edge software and AI products. We created The Real Feed – India’s smartest news analysis app.',
-  keywords:
-    'DZDX, DZDX Solutions, The Real Feed, TRF, Indian news app, AI news, bias detection, sentiment analysis, Indian tech company, Kanpur startup, generative AI, innovation, AI products, software solutions',
+    'Experience The Real Feed, India’s leading AI-powered news analysis app by DZDX Solutions Pvt Ltd, uncovering bias, sentiment, and emotional tone in headlines and articles.',
+  keywords: [
+    'The Real Feed', 'DZDX Solutions', 'AI news app', 'news analysis', 'bias detection',
+    'sentiment analysis', 'Indian news app', 'real-time news intelligence'
+  ].join(', '),
   authors: [{ name: 'DZDX Solutions Pvt Ltd' }],
   creator: 'DZDX Solutions Pvt Ltd',
   publisher: 'DZDX Solutions Pvt Ltd',
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0',
+  viewport: 'width=device-width, initial-scale=1.0',
   openGraph: {
-    title: 'DZDX – Creators of The Real Feed (TRF)',
+    title: 'The Real Feed – AI-Powered News Analysis App by DZDX',
     description:
-      'Meet The Real Feed – India’s most powerful AI news analysis app. Built by DZDX Solutions Pvt Ltd.',
+      'The Real Feed analyzes Indian news to detect bias, sentiment, and emotional tone with AI — by DZDX Solutions.',
     type: 'website',
     locale: 'en_IN',
-    url: 'https://dzdx.in',
+    url: 'https://dzdx.in/trf',
     siteName: 'The Real Feed by DZDX',
     images: [
       {
         url: '/public/TRF512x512.png',
         width: 1200,
         height: 630,
-        alt: 'The Real Feed – Powered by DZDX',
+        alt: 'The Real Feed – AI News Analysis App',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Real Feed – India’s AI-Powered News App by DZDX',
+    title: 'The Real Feed – India’s AI News Analysis App by DZDX',
     description:
-      'The Real Feed analyzes news with AI – detect bias, sentiment, tone, and emotion. Created by DZDX Solutions Pvt Ltd.',
+      'Explore The Real Feed, an AI-driven app that uncovers bias, tone, and sentiment in news headlines and articles. Created by DZDX Solutions.',
     images: ['/images/trf-twitter-card.jpg'],
   },
   icons: {

@@ -12,7 +12,7 @@ export default function TRFPage() {
   const [phone, setPhone] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
-
+  const [showBanner, setShowBanner] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -101,7 +101,9 @@ export default function TRFPage() {
         setPhone('');
 
         // Show success message
-        alert(`Successfully added to waitlist! We'll be in touch soon.`);
+        setShowBanner(true);
+        document.getElementById('landing')?.scrollIntoView({ behavior: 'smooth' });
+
       } else {
         // Show error message
         alert(`Error: ${result.error}`);
@@ -116,17 +118,29 @@ export default function TRFPage() {
 
   return (
     <div className="page-container">
+      {showBanner && (
+        <div className="banner-alert">
+          <span>
+            Successfully added to waitlist! We'll be in touch soon.
+          </span>
+          <button className="banner-close" onClick={() => setShowBanner(false)}>
+            &times;
+          </button>
+        </div>
+      )}
       {/* Landing Section */}
-      <div className="landing-section">
+      <div id="landing" className="landing-section">
         <div className="landing-text-wrapper">
           <div className="landing-intro">Introducing</div>
-          <h1 className="landing-title">The Real Feed</h1>
+          <div className="landing-title-container">
+            <div className="beta-label">BETA</div>
+            <h1 className="landing-title">THE REAL FEED</h1>
+          </div>
           <div className="landing-motto">
             Facts <span className="dot">•</span> Perspective <span className="dot">•</span> Power
           </div>
         </div>
       </div>
-
 
       {isSticky && (
         <div className="sticky-title">The Real Feed</div>
@@ -236,7 +250,7 @@ export default function TRFPage() {
       </div>
 
       {/* Waitlist Section */}
-      <div className="waitlist-section">
+      <div id="waitlist" className="waitlist-section">
         <div className="waitlist-content">
           <div className="waitlist-badge">Early Access</div>
           <h2 className="waitlist-title">Join the Revolution</h2>
