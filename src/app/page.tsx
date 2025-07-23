@@ -11,8 +11,8 @@ export default function HomePage() {
   return (
     <div className="relative min-h-screen">
       <EarthBackground />
-      
-      <main className="relative z-20 flex flex-col items-center justify-center min-h-screen px-5 text-center">
+
+      <main className="relative z-0 flex flex-col items-center justify-center min-h-screen px-5 text-center">
         <div className="animate-fade-in">
           {/* Logo */}
           <div className="mb-4">
