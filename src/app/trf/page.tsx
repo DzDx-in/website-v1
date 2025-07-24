@@ -186,37 +186,37 @@ export default function RealFeedWithAnimation() {
     {
       title: "Emotional Headlines, Hidden Motives",
       description: "We detect emotional tone and hidden intent — so you know what's real.",
-      media: "https://cdn.dzdx.in/features/1.jpg",
+      media: "https://cdn.dzdx.in/1.webp",
       type: "image"
     },
     {
       title: "Opinions Disguised as Facts",
       description: "We tag every sentence as fact, opinion, or speculation — and rate story balance.",
-      media: "https://cdn.dzdx.in/features/1.mp4",
+      media: "https://cdn.dzdx.in/1.webm",
       type: "video"
     },
     {
       title: "Long, Complex & Hard to Read",
       description: "We break it down into short summaries and key points — so you get the gist fast.",
-      media: "https://cdn.dzdx.in/features/1.jpg",
+      media: "https://cdn.dzdx.in/1.webp",
       type: "image"
     },
     {
       title: "Can't Trust What You Read",
       description: "We show all sources and rate trust — so you know what's verified.",
-      media: "https://cdn.dzdx.in/features/1.mp4",
+      media: "https://cdn.dzdx.in/1.webm",
       type: "video"
     },
     {
       title: "Subtle Psychological Influence",
       description: "We flag manipulation tactics — so you stay in control of how you think.",
-      media: "https://cdn.dzdx.in/features/1.jpg",
+      media: "https://cdn.dzdx.in/1.webp",
       type: "image"
     },
     {
       title: "One-Sided Stories, No Space to Think",
       description: "We merge multiple views and open discussions — so you see the full picture.",
-      media: "https://cdn.dzdx.in/features/1.mp4",
+      media: "https://cdn.dzdx.in/1.webm",
       type: "video"
     }
   ];
@@ -248,7 +248,7 @@ export default function RealFeedWithAnimation() {
           loop
           className="w-full h-full object-cover blur"
         >
-          <source src="https://cdn.dzdx.in/landing.mp4" type="video/mp4" />
+          <source src="https://cdn.dzdx.in/landing.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/30"></div>
         <div
@@ -454,7 +454,7 @@ export default function RealFeedWithAnimation() {
                         fill
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="100vw"
-                        priority={index === 0} // Optionally prioritize the first image
+                        priority={index === 0}
                       />
                     ) : (
                       <video

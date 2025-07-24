@@ -61,6 +61,10 @@ const Footer = () => {
         <Link href="/support" className="hover:underline px-2">
           Support
         </Link>
+        |
+        <Link href="/career" className="hover:underline px-2">
+          Career
+        </Link>
       </div>
     </footer>
   );
