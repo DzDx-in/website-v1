@@ -3,6 +3,7 @@
 import Footer from '@/components/Layout/Footer';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+
 export default function RealFeedWithAnimation() {
   const [scrollY, setScrollY] = useState(0);
   const [windowDimensions, setWindowDimensions] = useState({
@@ -185,37 +186,37 @@ export default function RealFeedWithAnimation() {
     {
       title: "Emotional Headlines, Hidden Motives",
       description: "We detect emotional tone and hidden intent — so you know what's real.",
-      media: "/features/1.jpg",
+      media: "https://cdn.dzdx.in/features/1.jpg",
       type: "image"
     },
     {
       title: "Opinions Disguised as Facts",
       description: "We tag every sentence as fact, opinion, or speculation — and rate story balance.",
-      media: "/features/1.mp4",
+      media: "https://cdn.dzdx.in/features/1.mp4",
       type: "video"
     },
     {
       title: "Long, Complex & Hard to Read",
       description: "We break it down into short summaries and key points — so you get the gist fast.",
-      media: "/features/1.jpg",
+      media: "https://cdn.dzdx.in/features/1.jpg",
       type: "image"
     },
     {
       title: "Can't Trust What You Read",
       description: "We show all sources and rate trust — so you know what's verified.",
-      media: "/features/1.mp4",
+      media: "https://cdn.dzdx.in/features/1.mp4",
       type: "video"
     },
     {
       title: "Subtle Psychological Influence",
       description: "We flag manipulation tactics — so you stay in control of how you think.",
-      media: "/features/1.jpg",
+      media: "https://cdn.dzdx.in/features/1.jpg",
       type: "image"
     },
     {
       title: "One-Sided Stories, No Space to Think",
       description: "We merge multiple views and open discussions — so you see the full picture.",
-      media: "/features/1.mp4",
+      media: "https://cdn.dzdx.in/features/1.mp4",
       type: "video"
     }
   ];
@@ -247,7 +248,7 @@ export default function RealFeedWithAnimation() {
           loop
           className="w-full h-full object-cover blur"
         >
-          <source src="/landing.mp4" type="video/mp4" />
+          <source src="https://cdn.dzdx.in/landing.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/30"></div>
         <div

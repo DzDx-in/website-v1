@@ -6,7 +6,7 @@ const nextConfig = {
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
     ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
     JWT_SECRET: process.env.JWT_SECRET,
-    
+
     // Email config
     EMAIL_SERVER: process.env.EMAIL_SERVER,
     EMAIL_PORT: process.env.EMAIL_PORT,
@@ -18,6 +18,9 @@ const nextConfig = {
   publicRuntimeConfig: {
     // Will be available on both server and client
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  },
+  images: {
+    domains: ['cdn.dzdx.in'],
   },
 };
 
