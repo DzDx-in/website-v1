@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
     
     // Generate slug and ensure uniqueness
     const posts = getBlogPostsData();
-    let baseSlug = generateSlug(postData.title);
+    const baseSlug = generateSlug(postData.title);
     let slug = baseSlug;
     let counter = 1;
     

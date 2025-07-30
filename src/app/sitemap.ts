@@ -4,6 +4,24 @@ import fs from 'fs';
 import path from 'path';
 import { BlogPost } from '@/app/api/blog/route';
 
+// Define Job type interface based on your actual data structure
+interface Job {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  experience: string;
+  salary: string;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+  benefits: string[];
+  applicationDeadline: string;
+  isActive: boolean;
+  postedDate: string;
+}
+
 // Helper function to read blog posts
 const getBlogPosts = (): BlogPost[] => {
   try {
@@ -79,8 +97,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Get job posts (if you want to include them)
-  const getJobPosts = () => {
+  // Get job posts
+  const getJobPosts = (): Job[] => {
     try {
       const jobsFilePath = path.join(process.cwd(), 'data', 'jobs.json');
       if (!fs.existsSync(jobsFilePath)) {
@@ -88,7 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }
       const data = fs.readFileSync(jobsFilePath, 'utf8');
       const jobs = JSON.parse(data);
-      return jobs.filter((job: any) => job.isActive);
+      return jobs.filter((job: Job) => job.isActive);
     } catch (error) {
       console.error('Error reading jobs for sitemap:', error);
       return [];
@@ -96,9 +114,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   };
 
   const jobs = getJobPosts();
-  const jobPages = jobs.map((job: any) => ({
+  const jobPages = jobs.map((job: Job) => ({
     url: `${baseUrl}/jobs/${job.id}`,
-    lastModified: new Date(job.updatedAt || job.postedDate),
+    lastModified: new Date(job.postedDate),
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }));
