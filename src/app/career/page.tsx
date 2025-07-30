@@ -240,7 +240,7 @@ export default function JobsPage() {
           <div className="text-center mb-12">
             <Link href="/" className="inline-block mb-8">
               <Image
-                src="/new_main.svg"
+                src="https://cdn.dzdx.in/dzdx_nobg.png"
                 alt="DZDX Solutions Logo"
                 width={200}
                 height={200}

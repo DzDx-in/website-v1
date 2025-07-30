@@ -1,3 +1,4 @@
+// src/components/admin/AdminLayout.tsx (Updated with Blog navigation)
 'use client';
 
 import { ReactNode, useState, useEffect } from 'react';
@@ -32,11 +33,12 @@ const AdminLayout = ({ children, title, currentPath }: AdminLayoutProps) => {
     router.push('/admin');
   };
 
-  // Navigation items
+  // Navigation items - Updated with Blog
   const navItems = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: 'fas fa-th-large' },
     { path: '/admin/jobs', label: 'Job Listings', icon: 'fas fa-briefcase' },
     { path: '/admin/applications', label: 'Applications', icon: 'fas fa-users' },
+    { path: '/admin/blog', label: 'Blog Posts', icon: 'fas fa-edit' },
     { path: '/admin/settings', label: 'Settings', icon: 'fas fa-cog' },
   ];
 
@@ -57,7 +59,7 @@ const AdminLayout = ({ children, title, currentPath }: AdminLayoutProps) => {
           <div className="p-4 border-b border-white/10">
             <Link href="/admin/dashboard" className="flex items-center">
               <Image
-                src="/new_main.svg"
+                src="https://cdn.dzdx.in/dzdx_nobg.png"
                 alt="DZDX Solutions Logo"
                 width={40}
                 height={40}
@@ -110,7 +112,7 @@ const AdminLayout = ({ children, title, currentPath }: AdminLayoutProps) => {
           <div className="flex items-center justify-between p-4">
             <Link href="/admin/dashboard" className="flex items-center">
               <Image
-                src="/new_main.svg"
+                src="/https://cdn.dzdx.in/dzdx_nobg.png"
                 alt="DZDX Solutions Logo"
                 width={30}
                 height={30}

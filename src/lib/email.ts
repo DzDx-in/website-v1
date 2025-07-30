@@ -122,7 +122,7 @@ export async function sendStatusUpdateEmail(application: JobApplication): Promis
   const emailHtml = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background-color: #0a0a0f; padding: 20px; text-align: center;">
-        <img src="${baseUrl}/new_main.svg" alt="DZDX Solutions Logo" style="max-width: 150px;">
+        <img src="https://cdn.dzdx.in/dzdx_nobg.png" alt="DZDX Solutions Logo" style="max-width: 150px;">
       </div>
       
       <div style="padding: 20px; background-color: #f7f7f7;">

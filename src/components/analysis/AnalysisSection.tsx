@@ -401,7 +401,7 @@ const AnalysisSection = forwardRef<HTMLDivElement, AnalysisSectionProps>(
                   >
                     <Image
                       ref={screenshotRef}
-                      src={walkthrough?.screenshotUrl || '/dzdx_nobg.png'}
+                      src={walkthrough?.screenshotUrl || 'https://cdn.dzdx.in/dzdx_nobg.png'}
                       alt={`${title} Interface`}
                       fill
                       className="object-contain"

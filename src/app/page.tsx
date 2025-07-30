@@ -20,7 +20,7 @@ export default function HomePage() {
             {/* Logo */}
             <div className="animate-fade-in">
               <Image
-                src="/new_main.svg"
+                src="https://cdn.dzdx.in/DZDXLOGO351x86.png"
                 alt="DZDX Solutions Logo"
                 width={512}
                 height={512}

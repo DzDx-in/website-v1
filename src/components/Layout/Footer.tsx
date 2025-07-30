@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Logo + Description */}
         <div className="space-y-4">
           <Image
-            src="/dzdx_nobg.png"
+            src="https://cdn.dzdx.in/dzdx_nobg.png"
             alt="DZDX Logo"
             width={150}
             height={40}
@@ -64,6 +64,10 @@ const Footer = () => {
         |
         <Link href="/career" className="hover:underline px-2">
           Career
+        </Link>
+        |
+        <Link href="/blog" className="hover:underline px-2">
+          Blogs
         </Link>
       </div>
     </footer>

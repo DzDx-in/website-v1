@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
         <div className="w-full max-w-md animate-fade-in">
           <div className="text-center mb-8">
             <Image
-              src="/new_main.svg"
+              src="https://cdn.dzdx.in/favicon.svg"
               alt="DZDX Solutions Logo"
               width={150}
               height={150}

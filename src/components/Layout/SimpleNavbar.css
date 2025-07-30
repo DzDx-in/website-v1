@@ -1,0 +1,17 @@
+.glow-gold {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  animation: pulse-gold 4s ease-in-out infinite;
+  filter: blur(15px);
+  transform: translateY(5px);
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1) translateY(5px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05) translateY(5px);
+  }
+}

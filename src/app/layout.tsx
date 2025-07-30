@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'The Real Feed by DZDX',
     images: [
       {
-        url: '/public/TRF512x512.png',
+        url: 'https://cdn.dzdx.in/TRF512x512.png',
         width: 1200,
         height: 630,
         alt: 'The Real Feed – AI News Analysis App',
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.svg', sizes: '32x32', type: 'image/svg+xml' },
     ],
-    apple: '/icons/icon-192x192.png',
+    apple: 'https://cdn.dzdx.in/TRF512x512.png',
   },
 };
 
@@ -88,10 +88,10 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "DZDX Solutions Pvt Ltd",
               "url": "https://dzdx.in",
-              "logo": "https://dzdx.in/logo.png",
+              "logo": "https://cdn.dzdx.in/TRF512x512.png",
               "sameAs": [
-                "https://linkedin.com/company/dzdx",
-                "https://instagram.com/therealfeedapp"
+                "https://linkedin.com/company/dzdx-in",
+                "https://instagram.com/dzdx.in/"
               ],
               "description": "DZDX is an Indian tech company building AI-powered products like The Real Feed, an app that analyzes Indian news for bias, sentiment, and more.",
               "foundingDate": "2025",
