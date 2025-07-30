@@ -4,6 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { isAuthenticated } from '@/lib/auth';
+import { revalidateSitemap } from '@/lib/sitemap';
+import { revalidatePath } from 'next/cache';
 
 // Define the blog data file path
 const dataFilePath = path.join(process.cwd(), 'data', 'blog-posts.json');
@@ -122,7 +124,7 @@ export async function POST(req: NextRequest) {
     
     // Generate slug and ensure uniqueness
     const posts = getBlogPostsData();
-    const baseSlug = generateSlug(postData.title);
+    let baseSlug = generateSlug(postData.title);
     let slug = baseSlug;
     let counter = 1;
     
@@ -150,6 +152,14 @@ export async function POST(req: NextRequest) {
     
     posts.push(newPost);
     writeBlogPostsData(posts);
+    
+    // Revalidate sitemap and blog pages if post is published
+    if (newPost.isPublished) {
+      revalidatePath('/blog');
+      revalidatePath('/sitemap.xml');
+      // Notify search engines about sitemap update
+      revalidateSitemap().catch(console.error);
+    }
     
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {

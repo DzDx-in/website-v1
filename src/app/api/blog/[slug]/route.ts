@@ -4,6 +4,8 @@ import fs from 'fs';
 import path from 'path';
 import { BlogPost } from '../route';
 import { isAuthenticated } from '@/lib/auth';
+import { revalidatePath } from 'next/cache';
+import { revalidateSitemap } from '@/lib/sitemap';
 
 // Define the blog data file path
 const dataFilePath = path.join(process.cwd(), 'data', 'blog-posts.json');
@@ -47,30 +49,28 @@ export async function GET(request: NextRequest) {
   try {
     const slug = getSlugFromRequest(request);
     if (!slug) return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
-    
+
     const posts = getBlogPostsData();
     const post = posts.find(post => post.slug === slug);
-    
+
     if (!post) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });
     }
-    
+
     // For public requests, only return published posts
     const url = new URL(request.url);
     const isAdminRequest = url.searchParams.get('admin') === 'true';
-    
+
     if (!isAdminRequest && !post.isPublished) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });
     }
-    
+
     return NextResponse.json(post);
   } catch (error) {
     console.error('Error fetching blog post:', error);
     return NextResponse.json({ error: 'Failed to fetch blog post' }, { status: 500 });
   }
 }
-
-// PUT handler - Update a blog post (admin only)
 export async function PUT(request: NextRequest) {
   try {
     // Check authentication
@@ -78,20 +78,23 @@ export async function PUT(request: NextRequest) {
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
+
     const slug = getSlugFromRequest(request);
     if (!slug) return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
-    
+
     const postData = await request.json();
     const posts = getBlogPostsData();
     const postIndex = posts.findIndex(post => post.slug === slug);
-    
+
     if (postIndex === -1) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });
     }
-    
-    // Update the post while preserving certain fields
+
     const existingPost = posts[postIndex];
+    const wasPublished = existingPost.isPublished;
+    const willBePublished = postData.isPublished;
+
+    // Update the post while preserving certain fields
     const updatedPost: BlogPost = {
       ...existingPost,
       ...postData,
@@ -100,14 +103,23 @@ export async function PUT(request: NextRequest) {
       createdAt: existingPost.createdAt, // Preserve creation date
       updatedAt: new Date().toISOString(),
       // Update published date only if publishing for the first time
-      publishedAt: postData.isPublished && !existingPost.isPublished 
-        ? new Date().toISOString() 
+      publishedAt: willBePublished && !wasPublished
+        ? new Date().toISOString()
         : existingPost.publishedAt,
     };
-    
+
     posts[postIndex] = updatedPost;
     writeBlogPostsData(posts);
-    
+
+    // Revalidate sitemap and blog pages if publication status changed
+    if (wasPublished !== willBePublished || willBePublished) {
+      revalidatePath('/blog');
+      revalidatePath(`/blog/${slug}`);
+      revalidatePath('/sitemap.xml');
+      // Notify search engines about sitemap update
+      revalidateSitemap().catch(console.error);
+    }
+
     return NextResponse.json(updatedPost);
   } catch (error) {
     console.error('Error updating blog post:', error);
@@ -123,21 +135,31 @@ export async function DELETE(request: NextRequest) {
     if (!authResult.authenticated) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
+
     const slug = getSlugFromRequest(request);
     if (!slug) return NextResponse.json({ error: 'Invalid slug' }, { status: 400 });
-    
+
     const posts = getBlogPostsData();
     const postIndex = posts.findIndex(post => post.slug === slug);
-    
+
     if (postIndex === -1) {
       return NextResponse.json({ error: 'Blog post not found' }, { status: 404 });
     }
-    
+
+    const deletedPost = posts[postIndex];
+
     // Remove the post
     posts.splice(postIndex, 1);
     writeBlogPostsData(posts);
-    
+
+    // Revalidate sitemap and blog pages if the deleted post was published
+    if (deletedPost.isPublished) {
+      revalidatePath('/blog');
+      revalidatePath('/sitemap.xml');
+      // Notify search engines about sitemap update
+      revalidateSitemap().catch(console.error);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting blog post:', error);
