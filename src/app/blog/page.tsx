@@ -87,7 +87,7 @@ export default function BlogPage() {
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-8 text-center max-w-md mx-auto">
               <h3 className="text-xl font-semibold text-white mb-2">No Posts Yet</h3>
               <p className="text-white/70">
-                We're working on some amazing content. Check back soon!
+                We&apos;re working on some amazing content. Check back soon!
               </p>
             </div>
           ) : (

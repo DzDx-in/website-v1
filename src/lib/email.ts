@@ -76,7 +76,7 @@ export async function sendApplicationEmail(application: JobApplication): Promise
 export async function sendStatusUpdateEmail(application: JobApplication): Promise<void> {
   const transporter = createTransporter();
   const emailUser = serverRuntimeConfig.EMAIL_USER || process.env.EMAIL_USER;
-  const baseUrl = publicRuntimeConfig.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.com';
+  // const baseUrl = publicRuntimeConfig.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://your-domain.com';
   const notificationEmail = serverRuntimeConfig.NOTIFICATION_EMAIL || process.env.NOTIFICATION_EMAIL || 'adm.dzdx@gmail.com';
   
   // Status-specific messaging

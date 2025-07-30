@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import EarthBackground from '@/components/EarthBackground';
@@ -49,7 +49,7 @@ export default function BlogPostPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const params = useParams();
-  const router = useRouter();
+  // const router = useRouter();
   const slug = params.slug as string;
 
   useEffect(() => {

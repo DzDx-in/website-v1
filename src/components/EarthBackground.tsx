@@ -1,6 +1,6 @@
 'use client';
 
-import SimpleNavbar from "./Layout/BlogNavbar";
+// import SimpleNavbar from "./Layout/BlogNavbar";
 
 const EarthTSLLookalike = () => {
   return (<>

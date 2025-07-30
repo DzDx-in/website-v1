@@ -133,7 +133,7 @@ const BlogForm = ({ post = {}, isEdit = false }: BlogFormProps) => {
         throw new Error(data.error || 'Failed to save blog post');
       }
 
-      const savedPost = await response.json();
+      // const savedPost = await response.json();
 
       if (isEdit) {
         setSuccess('Blog post updated successfully!');
