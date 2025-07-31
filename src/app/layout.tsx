@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: 'The Real Feed – India’s AI News Analysis App by DZDX',
     description:
       'Explore The Real Feed, an AI-driven app that uncovers bias, tone, and sentiment in news headlines and articles. Created by DZDX Solutions.',
-    images: ['/images/trf-twitter-card.jpg'],
+    images: ['https://cdn.dzdx.in/TRF512x512.png'],
   },
   icons: {
     icon: [
