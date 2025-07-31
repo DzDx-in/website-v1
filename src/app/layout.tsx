@@ -88,7 +88,10 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "DZDX Solutions Pvt Ltd",
               "url": "https://dzdx.in",
-              "logo": "https://cdn.dzdx.in/TRF512x512.png",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.dzdx.in/TRF512x512.png"
+              },
               "sameAs": [
                 "https://linkedin.com/company/dzdx-in",
                 "https://instagram.com/dzdx.in/"
@@ -142,10 +145,10 @@ export default function RootLayout({
           }}
         />
         <noscript>
-          <img 
-            height="1" 
-            width="1" 
-            style={{display: 'none'}}
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
             src="https://www.facebook.com/tr?id=802246002129134&ev=PageView&noscript=1"
             alt=""
           />
@@ -170,7 +173,7 @@ export default function RootLayout({
             `,
           }}
         />
-        
+
       </head>
       <body>
         <div>
