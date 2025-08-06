@@ -1,7 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '../styles/globals.css';
 
+// Add metadataBase and fix image paths
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dzdx.in'),
   title: 'DZDX Solutions - India\'s Premier AI Technology Company | Innovative Apps',
   description:
     'DZDX Solutions Pvt Ltd develops cutting-edge AI-powered applications including The Real Feed news analysis app. Leading Indian tech innovation from Kanpur.',
@@ -13,18 +15,18 @@ export const metadata: Metadata = {
   creator: 'DZDX Solutions Pvt Ltd',
   publisher: 'DZDX Solutions Pvt Ltd',
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0',
+  // Remove viewport from here - moved to separate export below
   openGraph: {
     title: 'DZDX Solutions - Leading AI Technology Company in India',
     description:
       'Discover innovative AI-powered applications by DZDX Solutions, including The Real Feed news analysis app. Indian tech innovation at its finest.',
     type: 'website',
     locale: 'en_IN',
-    url: 'https://dzdx.in',
+    url: '/', // Will be resolved with metadataBase
     siteName: 'DZDX Solutions',
     images: [
       {
-        url: '/dzdx/android-chrome-512x512.png',
+        url: '/dzdx/android-chrome-512x512.png', // Will be resolved with metadataBase
         width: 1200,
         height: 630,
         alt: 'DZDX Solutions - AI Technology Company',
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
     title: 'DZDX Solutions - India\'s AI Technology Innovation Hub',
     description:
       'Building the future with AI-powered applications like The Real Feed. Indian tech company delivering cutting-edge solutions.',
-    images: ['/dzdx/android-chrome-512x512.png'],
+    images: ['/dzdx/android-chrome-512x512.png'], // Will be resolved with metadataBase
   },
   icons: {
     icon: [
@@ -47,6 +49,16 @@ export const metadata: Metadata = {
     apple: '/dzdx/apple-touch-icon.png',
     shortcut: '/dzdx/favicon.ico',
   },
+  alternates: {
+    canonical: '/', // Will be resolved with metadataBase
+  },
+};
+
+// Separate viewport export (required in Next.js 14+)
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  themeColor: '#0a0a0f',
 };
 
 export default function RootLayout({
@@ -73,12 +85,10 @@ export default function RootLayout({
         <meta name="ICBM" content="26.4499, 80.3319" />
 
         {/* PWA & App Meta */}
-        <meta name="theme-color" content="#0a0a0f" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="manifest" href="/dzdx/site.webmanifest" />
-        <link rel="canonical" href="https://dzdx.in" />
 
         {/* Schema.org: Company Organization */}
         <script
@@ -91,7 +101,7 @@ export default function RootLayout({
               "url": "https://dzdx.in",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://dzdx.in/android-chrome-512x512.png",
+                "url": "https://dzdx.in/dzdx/android-chrome-512x512.png",
                 "width": "512",
                 "height": "512"
               },

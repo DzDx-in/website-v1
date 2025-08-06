@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import '../../styles/globals.css';
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   creator: 'DZDX Solutions Pvt Ltd',
   publisher: 'DZDX Solutions Pvt Ltd',
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0',
+  // Remove viewport from here - moved to separate export below
   other: {
     'mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-capable': 'yes',
@@ -66,6 +66,13 @@ export const metadata: Metadata = {
   }
 };
 
+// Separate viewport export (required in Next.js 14+)
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  themeColor: '#1a1a2e',
+};
+
 export default function TRFLayout({
   children,
 }: {
@@ -84,13 +91,12 @@ export default function TRFLayout({
         />
 
         {/* App-specific Meta */}
-        <meta name="theme-color" content="#1a1a2e" />
         <meta name="application-name" content="The Real Feed" />
         <meta name="apple-mobile-web-app-title" content="The Real Feed" />
         
         {/* App Store Meta - Update when live */}
         <meta name="google-play-app" content="app-id=com.dzdx.therealfeed" />
-        {/* <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" />
+        {/* <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" /> */}
 
         {/* Smart App Banner - Enable after launch */}
         <meta name="apple-itunes-app" content="app-id=com.dzdx.therealfeed, app-argument=https://dzdx.in/trf" />

@@ -20,7 +20,27 @@ const nextConfig = {
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   images: {
-    domains: ['cdn.dzdx.in'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dzdx.in',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.dzdx.in',
+        port: '',
+        pathname: '/**',
+      },
+      // Add other domains as needed
+      {
+        protocol: 'https',
+        hostname: 'cdnjs.cloudflare.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
