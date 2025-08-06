@@ -95,7 +95,7 @@ export default function RootLayout({
               "url": "https://dzdx.in",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://dzdx.in/android-chrome-512x512.png", // ← Must be accessible
+                "url": "/android-chrome-512x512.png", // ← Must be accessible
                 "width": "512",
                 "height": "512"
               },
