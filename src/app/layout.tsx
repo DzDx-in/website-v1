@@ -40,10 +40,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.svg', sizes: '32x32', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: 'https://cdn.dzdx.in/TRF512x512.png',
+    apple: '/apple-touch-icon.png', // ← Must be in public folder
+    shortcut: '/favicon.ico',
   },
 };
 
@@ -75,9 +77,12 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="canonical" href="https://dzdx.in" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
         {/* Schema.org: DZDX + The Real Feed */}
         <script
@@ -90,7 +95,9 @@ export default function RootLayout({
               "url": "https://dzdx.in",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://cdn.dzdx.in/TRF512x512.png"
+                "url": "https://dzdx.in/android-chrome-512x512.png", // ← Must be accessible
+                "width": "512",
+                "height": "512"
               },
               "sameAs": [
                 "https://linkedin.com/company/dzdx-in",

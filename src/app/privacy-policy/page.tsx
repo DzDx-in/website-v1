@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 text-shadow-strong">
-              DZDX Privacy Policy for Global Scan
+              DZDX Privacy Policy for The Real Feed Platform
             </h1>
             <p className="text-dzdx-blue font-semibold">
               <strong>Effective Date: May 15, 2025</strong>
