@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: 'The Real Feed by DZDX',
     images: [
       {
-        url: 'https://cdn.dzdx.in/TRF512x512.png',
+        url: '/trf/android-chrome-512x512.png',
         width: 1200,
         height: 630,
         alt: 'The Real Feed - AI News Analysis App Download',
@@ -48,18 +48,18 @@ export const metadata: Metadata = {
     title: 'Download The Real Feed - India\'s AI News Analysis App',
     description:
       'Get India\'s smartest news app with AI-powered bias detection, sentiment analysis, and community discussions. Coming August 15, 2025.',
-    images: ['https://cdn.dzdx.in/TRF512x512.png'],
+    images: ['/trf/android-chrome-512x512.png'],
     creator: '@dzdx_in',
     site: '@dzdx_in',
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/trf/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/trf/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/trf/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
-    shortcut: '/favicon.ico',
+    apple: '/trf/apple-touch-icon.png',
+    shortcut: '/trf/favicon.ico',
   },
   alternates: {
     canonical: 'https://dzdx.in/trf',
@@ -89,11 +89,11 @@ export default function TRFLayout({
         <meta name="apple-mobile-web-app-title" content="The Real Feed" />
         
         {/* App Store Meta - Update when live */}
-        {/* <meta name="google-play-app" content="app-id=com.dzdx.therealFeed" /> */}
-        {/* <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" /> */}
+        <meta name="google-play-app" content="app-id=com.dzdx.therealfeed" />
+        {/* <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" />
 
         {/* Smart App Banner - Enable after launch */}
-        {/* <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID, app-argument=https://dzdx.in/trf" /> */}
+        <meta name="apple-itunes-app" content="app-id=com.dzdx.therealfeed, app-argument=https://dzdx.in/trf" />
 
         {/* GEO Meta */}
         <meta name="geo.region" content="IN" />

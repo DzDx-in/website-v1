@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'DZDX Solutions',
     images: [
       {
-        url: 'https://cdn.dzdx.in/dzdx-og-image.png',
+        url: '/dzdx/android-chrome-512x512.png',
         width: 1200,
         height: 630,
         alt: 'DZDX Solutions - AI Technology Company',
@@ -36,16 +36,16 @@ export const metadata: Metadata = {
     title: 'DZDX Solutions - India\'s AI Technology Innovation Hub',
     description:
       'Building the future with AI-powered applications like The Real Feed. Indian tech company delivering cutting-edge solutions.',
-    images: ['https://cdn.dzdx.in/dzdx-og-image.png'],
+    images: ['/dzdx/android-chrome-512x512.png'],
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/dzdx/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/dzdx/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/dzdx/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
-    shortcut: '/favicon.ico',
+    apple: '/dzdx/apple-touch-icon.png',
+    shortcut: '/dzdx/favicon.ico',
   },
 };
 
@@ -77,7 +77,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="manifest" href="/dzdx/site.webmanifest" />
         <link rel="canonical" href="https://dzdx.in" />
 
         {/* Schema.org: Company Organization */}
