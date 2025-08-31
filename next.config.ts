@@ -23,21 +23,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'dzdx.in',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.dzdx.in',
-        port: '',
-        pathname: '/**',
-      },
-      // Add other domains as needed
-      {
-        protocol: 'https',
-        hostname: 'cdnjs.cloudflare.com',
-        port: '',
+        hostname: '**',  // allow all domains
         pathname: '/**',
       },
     ],
