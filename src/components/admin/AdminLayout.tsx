@@ -34,13 +34,14 @@ const AdminLayout = ({ children, title, currentPath }: AdminLayoutProps) => {
   };
 
   // Navigation items - Updated with Blog
-  const navItems = [
-    { path: '/admin/dashboard', label: 'Dashboard', icon: 'fas fa-th-large' },
-    { path: '/admin/jobs', label: 'Job Listings', icon: 'fas fa-briefcase' },
-    { path: '/admin/applications', label: 'Applications', icon: 'fas fa-users' },
-    { path: '/admin/blog', label: 'Blog Posts', icon: 'fas fa-edit' },
-    { path: '/admin/settings', label: 'Settings', icon: 'fas fa-cog' },
-  ];
+const navItems = [
+  { path: '/admin/dashboard', label: 'Dashboard', icon: 'fas fa-th-large' },
+  { path: '/admin/jobs', label: 'Job Listings', icon: 'fas fa-briefcase' },
+  { path: '/admin/applications', label: 'Applications', icon: 'fas fa-users' },
+  { path: '/admin/routes', label: 'Dynamic Routes', icon: 'fas fa-link' },
+  { path: '/admin/blog', label: 'Blog Posts', icon: 'fas fa-edit' },
+  { path: '/admin/settings', label: 'Settings', icon: 'fas fa-cog' },
+];
 
   if (!isAuthenticated) {
     return null; // Don't render anything until authentication check is complete
