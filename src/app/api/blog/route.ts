@@ -155,8 +155,8 @@ export async function POST(req: NextRequest) {
     
     // Revalidate sitemap and blog pages if post is published
     if (newPost.isPublished) {
-      revalidatePath('/blog');
-      revalidatePath('/sitemap.xml');
+      revalidatePath('/blog', 'page');
+      revalidatePath('/sitemap', 'page');
       // Notify search engines about sitemap update
       revalidateSitemap().catch(console.error);
     }

@@ -4,6 +4,10 @@ import fs from 'fs';
 import path from 'path';
 import { BlogPost } from '@/app/api/blog/route';
 
+// Force dynamic generation - sitemap will regenerate on each request
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 // Define Job type interface based on your actual data structure
 interface Job {
   id: string;
@@ -42,6 +46,14 @@ const getBlogPosts = (): BlogPost[] => {
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://dzdx.in'; // Replace with your actual domain
   
+  // Get blog posts for calculating latest update
+  const blogPosts = getBlogPosts();
+
+  // Calculate the most recent blog update date
+  const latestBlogUpdate = blogPosts.length > 0
+    ? new Date(Math.max(...blogPosts.map(post => new Date(post.updatedAt).getTime())))
+    : new Date();
+
   // Static pages
   const staticPages = [
     {
@@ -52,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: latestBlogUpdate, // Use actual latest blog update date
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
@@ -83,7 +95,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Dynamic blog posts
-  const blogPosts = getBlogPosts();
   const blogPages = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.updatedAt),

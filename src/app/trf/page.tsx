@@ -12,31 +12,10 @@ export default function RealFeedWithAnimation() {
   });
   // const [isMounted, setIsMounted] = useState(false);
 
-  // Waitlist form state
-  const [waitlistForm, setWaitlistForm] = useState({
-    email: '',
-    phone: ''
-  });
-  const [waitlistStatus, setWaitlistStatus] = useState({
-    loading: false,
-    success: false,
-    error: ''
-  });
-  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
-
-  // Waitlist stats state
-  const [waitlistStats, setWaitlistStats] = useState({
-    totalCount: 1410,
-    recentSubmissions: [],
+  // Stats state
+  const [stats, setStats] = useState({
+    totalUsers: 2500,
     loading: true
-  });
-
-  // Countdown state - Launch date: March 15, 2025
-  const [countdown, setCountdown] = useState({
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00'
   });
 
   useEffect(() => {
@@ -57,128 +36,33 @@ export default function RealFeedWithAnimation() {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
-    // Fetch waitlist stats
-    fetchWaitlistStats();
-
-    // Setup countdown timer
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    // Fetch stats
+    fetchStats();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
-      clearInterval(countdownInterval);
     };
   }, []);
 
-  // Fetch waitlist statistics
-  const fetchWaitlistStats = async () => {
+  // Fetch user statistics
+  const fetchStats = async () => {
     try {
       const response = await fetch('/api/waitlist');
       const data = await response.json();
 
       if (data.success) {
         const actualCount = data.data.totalCount;
-        const boostedTotal = 1410 + actualCount; // Boost by adding actual count to base 1410
+        const totalUsers = 1410 + actualCount;
 
-        setWaitlistStats({
-          totalCount: boostedTotal,
-          recentSubmissions: data.data.recentSubmissions || [],
+        setStats({
+          totalUsers: totalUsers,
           loading: false
         });
       }
     } catch (error) {
-      console.error('Error fetching waitlist stats:', error);
-      setWaitlistStats(prev => ({ ...prev, loading: false }));
-    }
-  };
-
-  // Update countdown timer
-  const updateCountdown = () => {
-    const launchDate = new Date('2025-08-15T00:00:00').getTime();
-    const now = new Date().getTime();
-    const distance = launchDate - now;
-
-    if (distance > 0) {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setCountdown({
-        days: days.toString().padStart(2, '0'),
-        hours: hours.toString().padStart(2, '0'),
-        minutes: minutes.toString().padStart(2, '0'),
-        seconds: seconds.toString().padStart(2, '0')
-      });
-    } else {
-      setCountdown({
-        days: '00',
-        hours: '00',
-        minutes: '00',
-        seconds: '00'
-      });
-    }
-  };
-
-  // Handle waitlist form submission
-  const handleWaitlistSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!waitlistForm.email || !waitlistForm.phone) {
-      setWaitlistStatus({
-        loading: false,
-        success: false,
-        error: 'Please fill in all fields'
-      });
-      return;
-    }
-
-    setWaitlistStatus({ loading: true, success: false, error: '' });
-
-    try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(waitlistForm),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setWaitlistStatus({
-          loading: false,
-          success: true,
-          error: ''
-        });
-        setWaitlistForm({ email: '', phone: '' });
-
-        // Refresh waitlist stats after successful submission
-        fetchWaitlistStats();
-
-        // Close modal after 2 seconds
-        setTimeout(() => {
-          setShowWaitlistModal(false);
-          setWaitlistStatus({ loading: false, success: false, error: '' });
-        }, 3000);
-      } else {
-        setWaitlistStatus({
-          loading: false,
-          success: false,
-          error: data.error || 'Something went wrong. Please try again.'
-        });
-      }
-    } catch (error) {
-      let errorMessage = 'Network error. Please try again.';
-      if (error instanceof Error) {
-        errorMessage += ` ${error.message}`;
-      }
-      setWaitlistStatus({
-        loading: false,
-        success: false,
-        error: errorMessage
-      });
+      console.error('Error fetching stats:', error);
+      setStats(prev => ({ ...prev, loading: false }));
     }
   };
 
@@ -275,13 +159,25 @@ export default function RealFeedWithAnimation() {
           )}
         </div>
 
-        {/* Right side - CTA Button */}
-        <button
-          onClick={() => setShowWaitlistModal(true)}
-          className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-1.5 px-3 sm:py-2 sm:px-4 text-white font-medium transition-all duration-200 text-sm sm:text-base"
-        >
-          Join Waitlist
-        </button>
+        {/* Right side - Download Buttons */}
+        <div className="flex gap-2">
+          <a
+            href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-1.5 px-3 sm:py-2 sm:px-4 text-white font-medium transition-all duration-200 text-xs sm:text-sm"
+          >
+            iOS
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.dzdx.therealfeed&hl=en_IN"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-1.5 px-3 sm:py-2 sm:px-4 text-white font-medium transition-all duration-200 text-xs sm:text-sm"
+          >
+            Android
+          </a>
+        </div>
       </div>
 
       {/* The Real Feed Title with Cone Animation */}
@@ -310,110 +206,25 @@ export default function RealFeedWithAnimation() {
           opacity: 1 - progress * 2 // Fade out as user scrolls
         }}
       >
-        <div className="pointer-events-auto">
-          <button
-            onClick={() => setShowWaitlistModal(true)}
-            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-3 px-6 sm:py-4 sm:px-8 text-white font-medium transition-all duration-200 text-base sm:text-lg shadow-2xl"
+        <div className="pointer-events-auto flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <a
+            href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-3 px-6 sm:py-4 sm:px-8 text-white font-medium transition-all duration-200 text-base sm:text-lg shadow-2xl text-center"
           >
-            Join the Waitlist →
-          </button>
+            Download on iOS
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.dzdx.therealfeed&hl=en_IN"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-3 px-6 sm:py-4 sm:px-8 text-white font-medium transition-all duration-200 text-base sm:text-lg shadow-2xl text-center"
+          >
+            Download on Android
+          </a>
         </div>
       </div>
-
-      {/* Waitlist Modal */}
-      {showWaitlistModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-black/40 backdrop-blur-md rounded-2xl border border-white/20 p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl relative">
-            {/* Close button */}
-            <button
-              onClick={() => setShowWaitlistModal(false)}
-              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-white/70 hover:text-white text-xl sm:text-2xl"
-            >
-              ×
-            </button>
-
-            {waitlistStatus.success ? (
-              <div className="text-center py-6 sm:py-8">
-                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-green-500/20 text-green-400 mb-3 sm:mb-4">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Welcome to the Real Feed!</h3>
-                <p className="text-white/80 text-sm sm:text-base">
-                  You&apos;re on the waitlist! We&apos;ll notify you as soon as The Real Feed launches.
-                </p>
-              </div>
-            ) : (
-              <>
-                <div className="text-center mb-4 sm:mb-6">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Join The Real Feed</h3>
-                  <p className="text-white/80 text-sm sm:text-base">
-                    Be the first to experience authentic news analysis powered by AI.
-                  </p>
-                </div>
-
-                <form onSubmit={handleWaitlistSubmit} className="space-y-3 sm:space-y-4">
-                  {waitlistStatus.error && (
-                    <div className="bg-red-500/20 border border-red-500/50 text-red-100 px-3 sm:px-4 py-2 sm:py-3 rounded-md text-xs sm:text-sm">
-                      {waitlistStatus.error}
-                    </div>
-                  )}
-
-                  <div>
-                    <label htmlFor="email" className="block text-white/90 mb-1 sm:mb-2 text-xs sm:text-sm">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={waitlistForm.email}
-                      onChange={(e) => setWaitlistForm({ ...waitlistForm, email: e.target.value })}
-                      className="w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder-white/50 text-sm sm:text-base"
-                      placeholder="your@email.com"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-white/90 mb-1 sm:mb-2 text-xs sm:text-sm">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      value={waitlistForm.phone}
-                      onChange={(e) => setWaitlistForm({ ...waitlistForm, phone: e.target.value })}
-                      className="w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent placeholder-white/50 text-sm sm:text-base"
-                      placeholder="+91 98765 43210"
-                      required
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={waitlistStatus.loading}
-                    className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/50 text-white font-medium py-2.5 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 disabled:cursor-not-allowed text-sm sm:text-base"
-                  >
-                    {waitlistStatus.loading ? (
-                      <div className="flex items-center justify-center">
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                        Joining...
-                      </div>
-                    ) : (
-                      'Join Waitlist'
-                    )}
-                  </button>
-                </form>
-
-                <p className="text-white/60 text-xs text-center mt-3 sm:mt-4">
-                  We&apos;ll only use your information to notify you about The Real Feed launch.
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* Spacer to enable scrolling */}
       <div className="h-screen"></div>
@@ -612,105 +423,82 @@ export default function RealFeedWithAnimation() {
             )}
           </div>
 
-          {/* People Waiting Section */}
+          {/* Now Live Section */}
           <div className="relative py-12 sm:py-20">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
-
-                {/* People Waiting Counter */}
-                <div className="text-center lg:text-left order-2 lg:order-1">
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-                    People Waiting
-                  </h2>
-
-                  {/* Main Counter Box */}
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/20 mb-4 sm:mb-6">
-                    <div className="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-2">
-                      {waitlistStats.loading ? '1,410' : waitlistStats.totalCount.toLocaleString()}
-                    </div>
-                    <div className="text-white/70 text-sm sm:text-lg uppercase tracking-wider">
-                      Total Registered
-                    </div>
-                  </div>
-
-                  <p className="text-lg sm:text-xl text-white/80 mb-6 sm:mb-8">
-                    Join thousands of people who are ready to experience <br className="hidden sm:block" />
-                    <strong>The Real Feed</strong>
-                  </p>
-
+              <div className="text-center mb-8 sm:mb-12">
+                <div className="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full border border-green-400/30 mb-4">
+                  <span className="font-semibold">NOW LIVE</span>
                 </div>
-
-                {/* Countdown Timer */}
-                <div className="text-center lg:text-right order-1 lg:order-2">
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-                    Until Launch
-                  </h2>
-
-                  <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6 sm:mb-8">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-6 border border-white/20">
-                      <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">
-                        {countdown.days}
-                      </div>
-                      <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">
-                        Days
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-6 border border-white/20">
-                      <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">
-                        {countdown.hours}
-                      </div>
-                      <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">
-                        Hours
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-6 border border-white/20">
-                      <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">
-                        {countdown.minutes}
-                      </div>
-                      <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">
-                        Minutes
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-6 border border-white/20">
-                      <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">
-                        {countdown.seconds}
-                      </div>
-                      <div className="text-white/70 text-xs sm:text-sm uppercase tracking-wider">
-                        Sec
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Launch Date</h3>
-                    <div className="text-xl sm:text-2xl font-bold text-blue-400 mb-2">
-                      August 15, 2025
-                    </div>
-                    <p className="text-white/70 text-xs sm:text-sm">
-                      The Real Feed will be available on iOS, Android, and Web
-                    </p>
-                  </div>
-                </div>
-
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
+                  Available Now on iOS & Android
+                </h2>
+                <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto">
+                  Experience authentic news analysis powered by AI. Download The Real Feed today and see news differently.
+                </p>
               </div>
-            </div>
-          </div>
 
-          {/* Final Call-to-Action Section */}
-          <div className="relative py-12 sm:py-20 text-center">
-            <div className="max-w-2xl mx-auto px-4 sm:px-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Ready for Real News?
-              </h2>
-              <p className="text-lg sm:text-xl text-white/80 mb-6 sm:mb-8">
-                Join thousands of users who are waiting to experience news without the noise.
-              </p>
-              <button
-                onClick={() => setShowWaitlistModal(true)}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 sm:py-4 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-200 shadow-2xl"
-              >
-                Join the Waitlist
-              </button>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                {/* iOS Card */}
+                <a
+                  href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-200 group"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">iOS</h3>
+                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white/80 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z" />
+                    </svg>
+                  </div>
+                  <p className="text-white/70 text-sm sm:text-base mb-4">
+                    Download from the App Store
+                  </p>
+                  <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                    <span className="font-medium">Get it now</span>
+                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+
+                {/* Android Card */}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.dzdx.therealfeed&hl=en_IN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-200 group"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white">Android</h3>
+                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white/80 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.6,9.48L16.85,8.73C17.05,8.17 17.16,7.58 17.16,7C17.16,4.24 14.92,2 12.16,2C9.4,2 7.16,4.24 7.16,7C7.16,7.58 7.27,8.17 7.47,8.73L6.72,9.48C5.87,10.33 5.38,11.5 5.38,12.74V17C5.38,18.66 6.72,20 8.38,20H16C17.66,20 19,18.66 19,17V12.74C19,11.5 18.5,10.33 17.6,9.48M14.97,11.22C14.97,11.75 14.54,12.19 14,12.19C13.46,12.19 13.03,11.75 13.03,11.22C13.03,10.68 13.46,10.25 14,10.25C14.54,10.25 14.97,10.68 14.97,11.22M10.03,11.22C10.03,11.75 9.6,12.19 9.06,12.19C8.53,12.19 8.09,11.75 8.09,11.22C8.09,10.68 8.53,10.25 9.06,10.25C9.6,10.25 10.03,10.68 10.03,11.22Z" />
+                    </svg>
+                  </div>
+                  <p className="text-white/70 text-sm sm:text-base mb-4">
+                    Download from Google Play
+                  </p>
+                  <div className="flex items-center text-blue-400 group-hover:text-blue-300 transition-colors">
+                    <span className="font-medium">Get it now</span>
+                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+              </div>
+
+              {/* User Stats */}
+              <div className="mt-12 sm:mt-16 text-center">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/20 max-w-md mx-auto">
+                  <div className="text-4xl sm:text-6xl font-bold text-white mb-2">
+                    {stats.loading ? '2,500+' : stats.totalUsers.toLocaleString() + '+'}
+                  </div>
+                  <div className="text-white/70 text-sm sm:text-lg uppercase tracking-wider">
+                    Users Already Onboard
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

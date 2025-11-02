@@ -113,9 +113,9 @@ export async function PUT(request: NextRequest) {
 
     // Revalidate sitemap and blog pages if publication status changed
     if (wasPublished !== willBePublished || willBePublished) {
-      revalidatePath('/blog');
-      revalidatePath(`/blog/${slug}`);
-      revalidatePath('/sitemap.xml');
+      revalidatePath('/blog', 'page');
+      revalidatePath(`/blog/${slug}`, 'page');
+      revalidatePath('/sitemap', 'page');
       // Notify search engines about sitemap update
       revalidateSitemap().catch(console.error);
     }
@@ -154,8 +154,8 @@ export async function DELETE(request: NextRequest) {
 
     // Revalidate sitemap and blog pages if the deleted post was published
     if (deletedPost.isPublished) {
-      revalidatePath('/blog');
-      revalidatePath('/sitemap.xml');
+      revalidatePath('/blog', 'page');
+      revalidatePath('/sitemap', 'page');
       // Notify search engines about sitemap update
       revalidateSitemap().catch(console.error);
     }
