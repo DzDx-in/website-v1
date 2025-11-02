@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: 'The Real Feed by DZDX',
     images: [
       {
-        url: '/the-real-feed/android-chrome-512x512.png',
+        url: '/trf/android-chrome-512x512.png',
         width: 1200,
         height: 630,
         alt: 'The Real Feed - AI News Analysis App Download',
@@ -54,18 +54,18 @@ export const metadata: Metadata = {
     title: 'Download The Real Feed - India\'s AI News Analysis App',
     description:
       'Get India\'s smartest news app with AI-powered bias detection, sentiment analysis, and community discussions. Now available on iOS and Android.',
-    images: ['/the-real-feed/android-chrome-512x512.png'],
+    images: ['/trf/android-chrome-512x512.png'],
     creator: '@dzdx_in',
     site: '@dzdx_in',
   },
   icons: {
     icon: [
-      { url: '/the-real-feed/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
-      { url: '/the-real-feed/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/the-real-feed/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/trf/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/trf/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/trf/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: '/the-real-feed/apple-touch-icon.png',
-    shortcut: '/the-real-feed/favicon.ico',
+    apple: '/trf/apple-touch-icon.png',
+    shortcut: '/trf/favicon.ico',
   },
   alternates: {
     canonical: 'https://dzdx.in/the-real-feed',

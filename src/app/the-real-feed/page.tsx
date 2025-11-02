@@ -12,12 +12,6 @@ export default function RealFeedWithAnimation() {
   });
   // const [isMounted, setIsMounted] = useState(false);
 
-  // Stats state
-  const [stats, setStats] = useState({
-    totalUsers: 2500,
-    loading: true
-  });
-
   useEffect(() => {
     // setIsMounted(true);
 
@@ -36,35 +30,11 @@ export default function RealFeedWithAnimation() {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
-    // Fetch stats
-    fetchStats();
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  // Fetch user statistics
-  const fetchStats = async () => {
-    try {
-      const response = await fetch('/api/waitlist');
-      const data = await response.json();
-
-      if (data.success) {
-        const actualCount = data.data.totalCount;
-        const totalUsers = 1410 + actualCount;
-
-        setStats({
-          totalUsers: totalUsers,
-          loading: false
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching stats:', error);
-      setStats(prev => ({ ...prev, loading: false }));
-    }
-  };
 
   const features = [
     {
@@ -508,7 +478,7 @@ export default function RealFeedWithAnimation() {
               <div className="mt-12 sm:mt-16 text-center">
                 <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-white/20 max-w-md mx-auto">
                   <div className="text-4xl sm:text-6xl font-bold text-white mb-2">
-                    {stats.loading ? '2,500+' : stats.totalUsers.toLocaleString() + '+'}
+                    1,410+
                   </div>
                   <div className="text-white/70 text-sm sm:text-lg uppercase tracking-wider">
                     Users Already Onboard
