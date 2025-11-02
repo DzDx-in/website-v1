@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import EarthBackground from '@/components/EarthBackground';
+import Link from 'next/link';
 import EmailForm from '@/components/ui/EmailForm';
 import SocialLinks from '@/components/ui/SocialLinks';
 import Footer from '@/components/Layout/Footer';
@@ -25,7 +25,6 @@ export default function HomePage() {
 
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [activeSection, setActiveSection] = useState(0);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [particles, setParticles] = useState<Array<{ left: string; top: string; delay: string; duration: string }>>([]);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -45,13 +44,6 @@ export default function HomePage() {
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      const sections = document.querySelectorAll('[data-section]');
-      sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-          setActiveSection(index);
-        }
-      });
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -172,13 +164,13 @@ export default function HomePage() {
               </h1>
 
               <p className="text-2xl md:text-3xl text-white/40 font-extralight max-w-4xl mx-auto leading-relaxed animate-text-reveal">
-                Where artificial minds meet human ambition. Crafting tomorrow's digital reality, today.
+                Where artificial minds meet human ambition. Crafting tomorrow&apos;s digital reality, today.
               </p>
             </div>
 
             {/* Revolutionary CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-slide-up">
-              <a
+              <Link
                 href="/the-real-feed"
                 className="group relative inline-flex items-center gap-5 px-12 py-6 bg-white text-black font-semibold rounded-full overflow-hidden transition-all duration-700 hover:scale-110 hover:shadow-[0_0_100px_rgba(255,255,255,0.8)] hover:pr-16"
               >
@@ -188,7 +180,7 @@ export default function HomePage() {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              </a>
+              </Link>
 
               <button
                 onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
@@ -468,7 +460,7 @@ export default function HomePage() {
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1500" />
                         </div>
 
-                        <div className="absolute -top-3 -left-3 text-6xl text-yellow-400/20 font-serif leading-none">"</div>
+                        <div className="absolute -top-3 -left-3 text-6xl text-yellow-400/20 font-serif leading-none">&ldquo;</div>
 
                         <div className="relative h-full flex flex-col justify-between">
                           <div>
@@ -518,7 +510,7 @@ export default function HomePage() {
               <div className="relative text-center space-y-12">
                 <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/10 rounded-full">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                  <span className="text-xs text-white/60 uppercase tracking-widest font-light">Let's Build Together</span>
+                  <span className="text-xs text-white/60 uppercase tracking-widest font-light">Let&apos;s Build Together</span>
                 </div>
 
                 <h2 className="text-6xl md:text-8xl font-extralight text-white tracking-tighter leading-tight">
@@ -560,7 +552,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="text-4xl font-light text-white mb-2">24/7</div>
-                    <div className="text-xs text-white/30 font-light uppercase tracking-wider">We're Here</div>
+                    <div className="text-xs text-white/30 font-light uppercase tracking-wider">We&apos;re Here</div>
                   </div>
                 </div>
               </div>
