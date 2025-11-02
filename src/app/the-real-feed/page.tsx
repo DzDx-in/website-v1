@@ -300,37 +300,61 @@ export default function RealFeedWithAnimation() {
                 ))}
               </div>
             ) : (
-              // Desktop/Tablet Layout: Horizontal Scroll
-              <div className="relative w-full h-[70vh] sm:h-[80vh] overflow-hidden">
+              // Desktop/Tablet Layout: Simple Horizontal Scroll
+              <div className="relative w-full py-16 overflow-hidden">
+                {/* Section Header */}
+                <div className="max-w-7xl mx-auto px-8 mb-12 text-center">
+                  <h2 className="text-4xl md:text-6xl font-light text-white mb-4">
+                    What Makes us <span className="text-blue-400">Real</span>
+                  </h2>
+                  <p className="text-white/60">
+                    AI-powered transparency for unbiased journalism
+                  </p>
+                </div>
+
+                {/* Scroll Buttons */}
+                <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20">
+                  <button
+                    onClick={() => {
+                      const container = document.getElementById('features-scroll-container');
+                      if (container) container.scrollLeft -= 400;
+                    }}
+                    className="w-12 h-12 rounded-full bg-blue-500/20 hover:bg-blue-500/40 border border-blue-500/30 backdrop-blur-sm flex items-center justify-center transition-all duration-300"
+                  >
+                    <i className="fas fa-chevron-left text-blue-400" />
+                  </button>
+                </div>
+                <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+                  <button
+                    onClick={() => {
+                      const container = document.getElementById('features-scroll-container');
+                      if (container) container.scrollLeft += 400;
+                    }}
+                    className="w-12 h-12 rounded-full bg-blue-500/20 hover:bg-blue-500/40 border border-blue-500/30 backdrop-blur-sm flex items-center justify-center transition-all duration-300"
+                  >
+                    <i className="fas fa-chevron-right text-blue-400" />
+                  </button>
+                </div>
+
+                {/* Scrolling Cards Container */}
                 <div
-                  className="overflow-x-auto overflow-y-hidden w-full h-full scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+                  id="features-scroll-container"
+                  className="overflow-x-scroll overflow-y-hidden w-full px-8"
                   style={{
                     scrollBehavior: 'smooth',
-                    touchAction: 'pan-x pinch-zoom'
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none'
                   }}
                 >
-                  <div className="flex items-center space-x-4 sm:space-x-6 px-4 sm:px-6 py-4 h-full" style={{ marginLeft: isTablet ? '30px' : '60px' }}>
-
-                    {/* "What Makes us Real" text as first item */}
-                    <div
-                      className="flex-shrink-0 h-full flex items-center justify-center text-2xl sm:text-3xl lg:text-5xl font-bold text-white whitespace-nowrap"
-                      style={{
-                        width: isTablet ? '50%' : '40%',
-                        scrollSnapAlign: 'start',
-                      }}
-                    >
-                      What Makes us Real →
-                    </div>
-
+                  <div className="flex gap-6 pb-8">
                     {/* Feature Cards */}
                     {features.map((feature, index) => (
                       <div
                         key={index}
-                        className="relative rounded-2xl sm:rounded-3xl overflow-hidden flex-shrink-0 group cursor-pointer"
+                        className="relative rounded-2xl overflow-hidden flex-shrink-0 group cursor-pointer bg-black/40 border border-white/10 hover:border-blue-500/30 transition-all duration-300"
                         style={{
-                          width: isTablet ? '35%' : '25%',
-                          height: '100%',
-                          scrollSnapAlign: 'start'
+                          width: '350px',
+                          minHeight: '480px',
                         }}
                       >
                         {/* Media Background */}
@@ -339,8 +363,8 @@ export default function RealFeedWithAnimation() {
                             src={feature.media}
                             alt={feature.title}
                             fill
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 35vw, 100vw"
+                            className="absolute inset-0 w-full h-full object-cover"
+                            sizes="350px"
                             priority={index === 0}
                           />
                         ) : (
@@ -349,34 +373,30 @@ export default function RealFeedWithAnimation() {
                             muted
                             loop
                             playsInline
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover"
                           >
                             <source src={feature.media} type="video/mp4" />
                           </video>
                         )}
 
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />
 
-                        {/* Bottom Gradient */}
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, transparent 80%)'
-                          }}
-                        ></div>
+                        {/* Gradient Bottom */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
                         {/* Content */}
-                        <div className="relative h-full flex flex-col justify-start p-4 sm:p-6 lg:p-8 pt-6 sm:pt-8 lg:pt-10 z-10">
-                          <div className="mb-4 sm:mb-6 lg:mb-8">
-                            <h3 className="text-lg sm:text-xl lg:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white drop-shadow-lg">{feature.title}</h3>
-                            <p className="text-xs sm:text-sm lg:text-base text-white/90 leading-relaxed mb-3 sm:mb-4 lg:mb-6 drop-shadow-md">
-                              {feature.description}
-                            </p>
+                        <div className="relative h-full flex flex-col justify-end p-6 z-10">
+                          <h3 className="text-xl font-medium text-white mb-3">
+                            {feature.title}
+                          </h3>
+                          <p className="text-white/70 text-sm leading-relaxed mb-4">
+                            {feature.description}
+                          </p>
+                          <div className="flex items-center gap-2 text-blue-400 text-sm font-medium">
+                            <span>Learn more</span>
+                            <i className="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform" />
                           </div>
-                          <button className="self-start bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-2 px-3 sm:py-2.5 sm:px-4 lg:py-3 lg:px-6 text-white font-medium transition-all duration-200 drop-shadow-lg text-xs sm:text-sm lg:text-base">
-                            Learn more →
-                          </button>
                         </div>
                       </div>
                     ))}
@@ -384,7 +404,7 @@ export default function RealFeedWithAnimation() {
                 </div>
 
                 {/* Navigation Buttons - Hidden on mobile */}
-                <div className="flex justify-center items-center mt-6 sm:mt-8 space-x-4">
+                {/* <div className="flex justify-center items-center mt-6 sm:mt-8 space-x-4">
                   <button
                     className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full text-white transition-all duration-200"
                     onClick={() => {
@@ -414,7 +434,7 @@ export default function RealFeedWithAnimation() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
@@ -507,6 +527,16 @@ export default function RealFeedWithAnimation() {
       </div>
 
       <Footer />
+
+      <style jsx>{`
+        #features-scroll-container::-webkit-scrollbar {
+          display: none;
+        }
+        #features-scroll-container {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
 
     </div>
   );
