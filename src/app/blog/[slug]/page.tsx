@@ -280,7 +280,7 @@ export default function BlogPostPage() {
               Join thousands of people waiting for The Real Feed - our revolutionary news analysis platform.
             </p>
             <Link
-              href="/trf"
+              href="/the-real-feed"
               className="inline-block px-6 py-3 btn-primary text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-dzdx-blue"
             >
               Join The Real Feed Waitlist

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-    <footer className="backdrop-blur-md bg-black/40 text-white/80 py-8 px-4 mt-16">
+    <footer className="backdrop-blur-md bg-black/40 text-white/80 py-8 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Logo + Description */}
         <div className="space-y-4">

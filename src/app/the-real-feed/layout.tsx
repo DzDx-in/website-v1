@@ -38,11 +38,11 @@ export const metadata: Metadata = {
       'Experience India\'s most advanced AI news app. Detect bias, analyze sentiment, and engage with real-time news intelligence. Now available on iOS and Android.',
     type: 'website',
     locale: 'en_IN',
-    url: 'https://dzdx.in/trf',
+    url: 'https://dzdx.in/the-real-feed',
     siteName: 'The Real Feed by DZDX',
     images: [
       {
-        url: '/trf/android-chrome-512x512.png',
+        url: '/the-real-feed/android-chrome-512x512.png',
         width: 1200,
         height: 630,
         alt: 'The Real Feed - AI News Analysis App Download',
@@ -54,21 +54,21 @@ export const metadata: Metadata = {
     title: 'Download The Real Feed - India\'s AI News Analysis App',
     description:
       'Get India\'s smartest news app with AI-powered bias detection, sentiment analysis, and community discussions. Now available on iOS and Android.',
-    images: ['/trf/android-chrome-512x512.png'],
+    images: ['/the-real-feed/android-chrome-512x512.png'],
     creator: '@dzdx_in',
     site: '@dzdx_in',
   },
   icons: {
     icon: [
-      { url: '/trf/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
-      { url: '/trf/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/trf/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/the-real-feed/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/the-real-feed/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/the-real-feed/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-    apple: '/trf/apple-touch-icon.png',
-    shortcut: '/trf/favicon.ico',
+    apple: '/the-real-feed/apple-touch-icon.png',
+    shortcut: '/the-real-feed/favicon.ico',
   },
   alternates: {
-    canonical: 'https://dzdx.in/trf',
+    canonical: 'https://dzdx.in/the-real-feed',
   }
 };
 
@@ -99,8 +99,8 @@ export default function TRFLayout({
             "description": "India's smartest AI-powered news analysis app with bias detection, sentiment analysis, and real-time intelligence.",
             "applicationCategory": "NewsApplication",
             "operatingSystem": ["Android", "iOS"],
-            "url": "https://dzdx.in/trf",
-            "downloadUrl": "https://dzdx.in/trf",
+            "url": "https://dzdx.in/the-real-feed",
+            "downloadUrl": "https://dzdx.in/the-real-feed",
             "version": "1.0.0",
             "datePublished": "2025-08-15",
             "author": {
@@ -113,7 +113,7 @@ export default function TRFLayout({
               "name": "DZDX Solutions Pvt Ltd",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://cdn.dzdx.in/TRF512x512.png"
+                "url": "https://cdn.dzdx.in/the-real-feed512x512.png"
               }
             },
             "offers": {
@@ -138,8 +138,8 @@ export default function TRFLayout({
               "Offline reading support"
             ],
             "screenshot": [
-              "https://cdn.dzdx.in/trf-screenshot-1.png",
-              "https://cdn.dzdx.in/trf-screenshot-2.png"
+              "https://cdn.dzdx.in/the-real-feed-screenshot-1.png",
+              "https://cdn.dzdx.in/the-real-feed-screenshot-2.png"
             ],
             "softwareRequirements": "Android 6.0+ or iOS 12.0+",
             "fileSize": "25MB",
@@ -234,7 +234,7 @@ export default function TRFLayout({
                 "@type": "ListItem",
                 "position": 2,
                 "name": "The Real Feed",
-                "item": "https://dzdx.in/trf"
+                "item": "https://dzdx.in/the-real-feed"
               }
             ]
           }),

@@ -125,27 +125,28 @@ export default function RealFeedWithAnimation() {
   return (
     <div className="relative min-h-[200vh]">
       {/* Video Background - Fixed */}
-      <div className="fixed inset-0 w-full h-screen overflow-hidden">
+      <div className="fixed inset-0 w-full h-screen overflow-hidden z-0">
         <video
           autoPlay
           muted
           loop
-          className="w-full h-full object-cover blur"
+          className="w-full h-full object-cover"
         >
           <source src="https://cdn.dzdx.in/landing.webm" type="video/webm" />
         </video>
-        <div className="absolute inset-0 bg-black/30"></div>
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.9) 100%)`
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      {/* Golden gradient overlay - Matching root page theme */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-[#1a1a1a]/40 to-[#3a2a1e]/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_#FFD70015,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_#DAA52010,_transparent_70%)]" />
       </div>
 
       {/* Floating Navbar */}
       <div
-        className="fixed top-2.5 left-2 right-2 sm:left-4 sm:right-4 h-12 sm:h-16 bg-black/10 backdrop-blur-md rounded-xl border border-white/10 transition-opacity duration-500 flex items-center justify-between px-3 sm:px-6 z-10"
+        className="fixed top-2.5 left-2 right-2 sm:left-4 sm:right-4 h-12 sm:h-16 bg-black/10 backdrop-blur-md rounded-xl border border-white/10 transition-opacity duration-500 flex items-center justify-between px-3 sm:px-6 z-50"
         style={{
           opacity: navbarOpacity
         }}
@@ -182,7 +183,7 @@ export default function RealFeedWithAnimation() {
 
       {/* The Real Feed Title with Cone Animation */}
       {!(isMobile && progress === 1) && (
-        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-20 px-4">
+        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-[60] px-4">
           <h1
             className="text-white font-bold tracking-wider transition-all duration-200 ease-out text-center whitespace-nowrap"
             style={{
@@ -229,16 +230,11 @@ export default function RealFeedWithAnimation() {
       {/* Spacer to enable scrolling */}
       <div className="h-screen"></div>
 
-      {/* Content below the animation */}
-      <div id="features-section" className="relative z-0 text-white">
-        <div
-          className="absolute inset-0 backdrop-blur-md bg-black/20"
-          style={{
-            maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
-          }}
-        ></div>
+      {/* Shadow fade transition from hero to content */}
+      <div className="absolute left-0 right-0 h-40 bg-gradient-to-b from-transparent to-black/80 pointer-events-none z-20" style={{ top: 'calc(100vh - 10rem)' }} />
 
+      {/* Content below the animation */}
+      <div id="features-section" className="relative z-0 text-white bg-black/80 backdrop-blur-sm">
         <div className="relative">
           <div className="w-full py-12 sm:py-20">
             {/* Features Layout - Mobile: Vertical Cards, Desktop: Horizontal Scroll */}
@@ -280,7 +276,7 @@ export default function RealFeedWithAnimation() {
                     )}
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
 
                     {/* Bottom Gradient */}
                     <div
@@ -360,7 +356,7 @@ export default function RealFeedWithAnimation() {
                         )}
 
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"></div>
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
 
                         {/* Bottom Gradient */}
                         <div
@@ -444,7 +440,7 @@ export default function RealFeedWithAnimation() {
                   href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-200 group"
+                  className="bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/10 transition-all duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-2xl sm:text-3xl font-bold text-white">iOS</h3>
@@ -468,7 +464,7 @@ export default function RealFeedWithAnimation() {
                   href="https://play.google.com/store/apps/details?id=com.dzdx.therealfeed&hl=en_IN"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/15 transition-all duration-200 group"
+                  className="bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/10 transition-all duration-200 group"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-2xl sm:text-3xl font-bold text-white">Android</h3>
@@ -490,7 +486,7 @@ export default function RealFeedWithAnimation() {
 
               {/* User Stats */}
               <div className="mt-12 sm:mt-16 text-center">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-white/20 max-w-md mx-auto">
+                <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-white/20 max-w-md mx-auto">
                   <div className="text-4xl sm:text-6xl font-bold text-white mb-2">
                     {stats.loading ? '2,500+' : stats.totalUsers.toLocaleString() + '+'}
                   </div>
@@ -504,6 +500,12 @@ export default function RealFeedWithAnimation() {
 
         </div>
       </div>
+
+      {/* Shadow fade before footer */}
+      <div className="relative h-1">
+        <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-black/80 to-black/40 pointer-events-none" />
+      </div>
+
       <Footer />
 
     </div>
