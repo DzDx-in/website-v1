@@ -133,7 +133,7 @@ export default function RealFeedWithAnimation() {
         {/* Right side - Download Buttons */}
         <div className="flex gap-2">
           <a
-            href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+            href="https://apps.apple.com/in/app/the-real-feed-news-explained/id6749306200"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-1.5 px-3 sm:py-2 sm:px-4 text-white font-medium transition-all duration-200 text-xs sm:text-sm"
@@ -179,7 +179,7 @@ export default function RealFeedWithAnimation() {
       >
         <div className="pointer-events-auto flex flex-col sm:flex-row gap-3 sm:gap-4">
           <a
-            href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+            href="https://apps.apple.com/in/app/the-real-feed-news-explained/id6749306200"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full py-3 px-6 sm:py-4 sm:px-8 text-white font-medium transition-all duration-200 text-base sm:text-lg shadow-2xl text-center"
@@ -427,7 +427,7 @@ export default function RealFeedWithAnimation() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
                 {/* iOS Card */}
                 <a
-                  href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+                  href="https://apps.apple.com/in/app/the-real-feed-news-explained/id6749306200"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white/5 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-white/20 hover:bg-white/10 transition-all duration-200 group"

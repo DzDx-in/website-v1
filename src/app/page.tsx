@@ -285,7 +285,7 @@ export default function HomePage() {
                 {/* Download buttons */}
                 <div className="flex flex-wrap gap-4 pt-6">
                   <a
-                    href="https://apps.apple.com/us/app/the-real-feed-news-explained/id6749306200"
+                    href="https://apps.apple.com/in/app/the-real-feed-news-explained/id6749306200"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center gap-4 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300"
