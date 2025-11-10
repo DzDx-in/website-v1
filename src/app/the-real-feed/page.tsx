@@ -206,7 +206,7 @@ export default function RealFeedWithAnimation() {
       {/* Content below the animation */}
       <div id="features-section" className="relative z-0 text-white bg-black/80 backdrop-blur-sm">
         <div className="relative">
-          <div className="w-full py-12 sm:py-20">
+          <div className="w-full">
             {/* Features Layout - Mobile: Vertical Cards, Desktop: Horizontal Scroll */}
             {isMobile ? (
               // Mobile Layout: Vertical Stack
@@ -316,7 +316,7 @@ export default function RealFeedWithAnimation() {
                     msOverflowStyle: 'none'
                   }}
                 >
-                  <div className="flex gap-6 pb-8">
+                  <div className="flex gap-6">
                     {/* Feature Cards */}
                     {features.map((feature, index) => (
                       <div
@@ -372,45 +372,12 @@ export default function RealFeedWithAnimation() {
                     ))}
                   </div>
                 </div>
-
-                {/* Navigation Buttons - Hidden on mobile */}
-                {/* <div className="flex justify-center items-center mt-6 sm:mt-8 space-x-4">
-                  <button
-                    className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full text-white transition-all duration-200"
-                    onClick={() => {
-                      const container = document.querySelector('.overflow-x-auto');
-                      if (container) {
-                        const cardWidth = isTablet ? 280 + 16 : 320 + 24;
-                        container.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-
-                  <button
-                    className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full text-white transition-all duration-200"
-                    onClick={() => {
-                      const container = document.querySelector('.overflow-x-auto');
-                      if (container) {
-                        const cardWidth = isTablet ? 280 + 16 : 320 + 24;
-                        container.scrollBy({ left: cardWidth, behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div> */}
               </div>
             )}
           </div>
 
           {/* Now Live Section */}
-          <div className="relative py-12 sm:py-20">
+          <div id="download-section" className="relative">
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
               <div className="text-center mb-8 sm:mb-12">
                 <div className="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full border border-green-400/30 mb-4">
@@ -490,7 +457,24 @@ export default function RealFeedWithAnimation() {
 
         </div>
       </div>
-
+      <button
+        className='relative w-full flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-pointer'
+        onClick={() => {
+          const section = document.getElementById('download-section');
+          if (section) {
+            const navbarHeight = window.innerWidth < 768 ? 48 : 64;
+            const navbarTop = 10;
+            const offset = navbarHeight + navbarTop + 20; // Extra 20px padding
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+          }
+        }}
+        aria-label="Go to download section"
+      >
+        <span className='text-white font-bold' style={{ fontSize: 'clamp(3rem, 20vw, 310px)', textShadow: '0 4px 30px rgba(0,0,0,0.8)' }}>
+          Try Now→
+        </span>
+      </button>
       {/* Shadow fade before footer */}
       <div className="relative h-1">
         <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-black/80 to-black/40 pointer-events-none" />

@@ -1,7 +1,7 @@
 // src/app/admin/routes/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/admin/AdminLayout';
 
@@ -33,7 +33,7 @@ export default function AdminRoutesPage() {
   const router = useRouter();
 
   // Fetch routes
-  const fetchRoutes = async () => {
+  const fetchRoutes = useCallback(async () => {
     try {
       const token = localStorage.getItem('adminToken');
       const response = await fetch('/api/routes', {
@@ -59,11 +59,11 @@ export default function AdminRoutesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
 
   useEffect(() => {
     fetchRoutes();
-  }, [router]);
+  }, [fetchRoutes]);
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {

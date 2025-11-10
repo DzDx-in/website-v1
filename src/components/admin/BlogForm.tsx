@@ -3,6 +3,7 @@
 
 import { useState, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { BlogPost } from '@/app/api/blog/route';
 
 interface BlogFormProps {
@@ -320,10 +321,11 @@ const BlogForm = ({ post = {}, isEdit = false }: BlogFormProps) => {
                 
                 {formData.featuredImage && (
                   <div className="mt-3 relative w-full h-32 bg-black/20 rounded-md overflow-hidden">
-                    <img
+                    <Image
                       src={formData.featuredImage}
                       alt="Featured image preview"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).style.display = 'none';
                       }}
