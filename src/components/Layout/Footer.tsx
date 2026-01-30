@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Our Products</h3>
           <div className="space-y-3">
-            <Link href="/the-real-feed" className="group flex items-center gap-3 hover:text-white transition-colors">
+            <Link href="/therealfeed" className="group flex items-center gap-3 hover:text-white transition-colors">
               <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
                 <i className="fas fa-newspaper text-blue-400 text-sm" />
               </div>

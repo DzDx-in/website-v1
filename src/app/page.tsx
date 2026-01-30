@@ -171,7 +171,7 @@ export default function HomePage() {
             {/* Revolutionary CTA */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-slide-up">
               <Link
-                href="/the-real-feed"
+                href="/therealfeed"
                 className="group relative inline-flex items-center gap-5 px-12 py-6 bg-white text-black font-semibold rounded-full overflow-hidden transition-all duration-700 hover:scale-110 hover:shadow-[0_0_100px_rgba(255,255,255,0.8)] hover:pr-16"
               >
                 <span className="relative z-10 text-lg">Experience The Real Feed</span>
@@ -285,7 +285,7 @@ export default function HomePage() {
                 {/* Download buttons */}
                 <div className="flex flex-wrap gap-4 pt-6">
                   <a
-                    href="https://apps.apple.com/in/app/the-real-feed-news-explained/id6749306200"
+                    href="https://apps.apple.com/in/app/therealfeed-news-explained/id6749306200"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center gap-4 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl hover:bg-white/15 hover:border-white/30 hover:scale-105 transition-all duration-300"

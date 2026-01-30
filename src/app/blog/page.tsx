@@ -180,7 +180,7 @@ export default function BlogPage() {
                   Get notified when we publish new insights about AI, news analysis, and media literacy.
                 </p>
                 <Link
-                  href="/the-real-feed"
+                  href="/therealfeed"
                   className="inline-block px-6 py-3 btn-primary text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-dzdx-blue"
                 >
                   Join The Real Feed Waitlist
